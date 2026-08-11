@@ -1,4 +1,4 @@
-import logoNav from '../../Assets/Navbar/LogoNavbar.png'
+import logoNav from '../../assets/Navbar/LogoNavbar.png'
 
 function Navbar() {
 

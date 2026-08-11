@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom"
 
-import Navbar from "./Components/Navbar/Navbar"
+import Navbar from "./components/Navbar/Navbar"
 import BeforeElection from "./Pages/Admin/Before-Election/BeforeElection"
 import DuringElection from "./Pages/User/During-Election/DuringElection"
 import Footer from "./components/Footer/Footer"
