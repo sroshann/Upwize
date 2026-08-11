@@ -40,14 +40,14 @@ function BeforeElection() {
                 </div>
 
                 {/* <!-- Bento Grid --> */}
-                <div className="w-full max-w-7xl mx-auto mt-24 grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 font-['Plus_Jakarta_Sans']">
+                <div className="w-full max-w-7xl mx-auto mt-24 grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
                     {/* Card 1: Add a political association */}
                     <div className="bg-[#f9f9f9] rounded-[32px] p-8 shadow-sm flex flex-col justify-between">
                         <div>
                             <h2 className="text-2xl font-bold text-black mb-1">Add a political association</h2>
                             <p className="text-gray-500 mb-8">Create an identity that can people follow</p>
                         </div>
-                        
+
                         <div className="bg-white rounded-3xl p-6 shadow-sm flex-grow">
                             <div className="flex items-center gap-4 mb-6">
                                 <div className="text-[#0a1e43]">
@@ -78,7 +78,7 @@ function BeforeElection() {
                             <h2 className="text-2xl font-bold text-black mb-1">Add position of standing</h2>
                             <p className="text-gray-500 mb-8">Specify each roles or seats in which candidates can compete</p>
                         </div>
-                        
+
                         <div className="bg-white rounded-3xl p-6 shadow-sm flex-grow flex flex-col">
                             <div className="flex justify-between items-start mb-1">
                                 <div>
@@ -90,7 +90,7 @@ function BeforeElection() {
                                     <span className="material-symbols-outlined text-gray-500 text-[18px]">expand_more</span>
                                 </div>
                             </div>
-                            
+
                             <div className="flex gap-6 justify-end items-center mb-6 text-[9px] font-bold text-gray-500">
                                 <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#0865FF]"></div> SEATS AVAILABLE</div>
                                 <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#0a1e43]"></div> NOMINATIONS</div>
@@ -108,7 +108,7 @@ function BeforeElection() {
                                         </div>
                                     ))}
                                 </div>
-                                
+
                                 {/* Bars */}
                                 <div className="relative z-10 flex justify-between items-end pl-10 pr-2 w-full h-full pb-8">
                                     {/* Chairman */}
@@ -176,9 +176,9 @@ function BeforeElection() {
                             <h2 className="text-2xl font-bold text-black mb-1">Create candidates</h2>
                             <p className="text-gray-500 mb-8">Add details of individuals who can lead tomorrow</p>
                         </div>
-                        
+
                         <div className="bg-white rounded-3xl p-6 shadow-sm flex-grow relative min-h-[350px] flex items-center justify-center">
-                            
+
                             {/* Blue Card */}
                             <div className="absolute w-[240px] bg-[#0865FF] text-white rounded-3xl p-5 shadow-2xl transform -rotate-[10deg] -translate-x-28 z-10 transition-transform hover:z-40 hover:-translate-y-4">
                                 <div className="flex gap-3 items-start mb-4">
@@ -263,9 +263,9 @@ function BeforeElection() {
                             <h2 className="text-2xl font-bold text-black mb-1">Add admins</h2>
                             <p className="text-gray-500 mb-8">Create one more admin who can handle more</p>
                         </div>
-                        
+
                         <div className="bg-white rounded-3xl p-6 shadow-sm flex-grow flex flex-col gap-6">
-                            
+
                             <div className="flex gap-4">
                                 <div className="flex-grow bg-[#F8F9FA] rounded-full px-5 py-3.5 flex items-center gap-3">
                                     <span className="material-symbols-outlined text-gray-500">search</span>
@@ -285,7 +285,7 @@ function BeforeElection() {
                                         <h3 className="font-bold text-[22px] text-black">Arjun Menon</h3>
                                         <p className="text-gray-500 text-sm mb-1.5">Election Administrator</p>
                                         <div className="flex items-center gap-1.5 text-[#0865FF] text-xs font-bold">
-                                            <span className="material-symbols-outlined text-[#0865FF]" style={{fontSize: '16px', fontVariationSettings: "'FILL' 1"}}>verified</span> Super Admin
+                                            <span className="material-symbols-outlined text-[#0865FF]" style={{ fontSize: '16px', fontVariationSettings: "'FILL' 1" }}>verified</span> Super Admin
                                         </div>
                                     </div>
                                 </div>
@@ -297,17 +297,17 @@ function BeforeElection() {
                             <div className="bg-[#FAFAFA] rounded-3xl p-5 border border-gray-50">
                                 <div className="flex items-center gap-3 mb-5">
                                     <div className="bg-[#EBE5FF] text-[#8155FF] w-[34px] h-[34px] rounded-xl flex items-center justify-center">
-                                        <span className="material-symbols-outlined text-[#8155FF]" style={{fontSize: '20px', fontVariationSettings: "'FILL' 1"}}>receipt_long</span>
+                                        <span className="material-symbols-outlined text-[#8155FF]" style={{ fontSize: '20px', fontVariationSettings: "'FILL' 1" }}>receipt_long</span>
                                     </div>
                                     <h4 className="font-bold text-black text-lg">Recent Activity</h4>
                                 </div>
-                                
+
                                 <div className="flex flex-col gap-4">
                                     {/* Activity 1 */}
                                     <div className="bg-white border border-gray-100 rounded-2xl p-4 flex items-center justify-between shadow-sm">
                                         <div className="flex items-center gap-3">
                                             <div className="bg-[#DCFCE7] text-[#22C55E] w-9 h-9 rounded-full flex items-center justify-center">
-                                                <span className="material-symbols-outlined" style={{fontSize: '20px', fontVariationSettings: "'FILL' 1"}}>person_add</span>
+                                                <span className="material-symbols-outlined" style={{ fontSize: '20px', fontVariationSettings: "'FILL' 1" }}>person_add</span>
                                             </div>
                                             <div className="text-[13px]">
                                                 <span className="font-bold text-black">Added new admin</span> <span className="text-gray-500">Priya Nair</span>
@@ -315,12 +315,12 @@ function BeforeElection() {
                                         </div>
                                         <span className="text-gray-400 text-[11px] font-medium">Today, 10:30 AM</span>
                                     </div>
-                                    
+
                                     {/* Activity 2 */}
                                     <div className="bg-white border border-gray-100 rounded-2xl p-4 flex items-center justify-between shadow-sm">
                                         <div className="flex items-center gap-3">
                                             <div className="bg-[#E0F2FE] text-[#3B82F6] w-9 h-9 rounded-full flex items-center justify-center">
-                                                <span className="material-symbols-outlined" style={{fontSize: '18px', fontVariationSettings: "'FILL' 1"}}>edit</span>
+                                                <span className="material-symbols-outlined" style={{ fontSize: '18px', fontVariationSettings: "'FILL' 1" }}>edit</span>
                                             </div>
                                             <div className="text-[13px]">
                                                 <span className="font-bold text-black">Updated position</span> <span className="text-gray-500">Vice Chairman</span>
@@ -328,12 +328,12 @@ function BeforeElection() {
                                         </div>
                                         <span className="text-gray-400 text-[11px] font-medium">Today, 09:45 AM</span>
                                     </div>
-                                    
+
                                     {/* Activity 3 */}
                                     <div className="bg-white border border-gray-100 rounded-2xl p-4 flex items-center justify-between shadow-sm">
                                         <div className="flex items-center gap-3">
                                             <div className="bg-[#FFEDD5] text-[#F97316] w-9 h-9 rounded-full flex items-center justify-center">
-                                                <span className="material-symbols-outlined" style={{fontSize: '20px', fontVariationSettings: "'FILL' 1"}}>group</span>
+                                                <span className="material-symbols-outlined" style={{ fontSize: '20px', fontVariationSettings: "'FILL' 1" }}>group</span>
                                             </div>
                                             <div className="text-[13px]">
                                                 <span className="font-bold text-black">Assigned roles</span> <span className="text-gray-500">to 2 admins</span>
