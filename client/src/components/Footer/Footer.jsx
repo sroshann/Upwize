@@ -10,7 +10,7 @@ function Footer() {
                 {/* <!-- Top Section: Links and Contact --> */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
                     {/* <!-- Column 1: Quick Links --> */}
-                    <div data-purpose="footer-column">
+                    <div data-purpose="footer-column" className='flex flex-col items-center sm:items-start text-center sm:text-left'>
                         <h3 className="font-bold text-gray-900 mb-6 text-lg">Quick links</h3>
                         <ul className="space-y-4">
                             <li><a className="text-gray-500 hover:text-brand transition-colors" href="#">Home</a></li>
@@ -22,7 +22,7 @@ function Footer() {
                         </ul>
                     </div>
                     {/* <!-- Column 2: Job Categories --> */}
-                    <div data-purpose="footer-column">
+                    <div data-purpose="footer-column" className='flex flex-col items-center sm:items-start text-center sm:text-left'>
                         <h3 className="font-bold text-gray-900 mb-6 text-lg">Job categories</h3>
                         <ul className="space-y-4">
                             <li><a className="text-gray-500 hover:text-brand transition-colors" href="#">Technology &amp; IT</a></li>
@@ -34,7 +34,7 @@ function Footer() {
                         </ul>
                     </div>
                     {/* <!-- Column 3: Support & Resources --> */}
-                    <div data-purpose="footer-column">
+                    <div data-purpose="footer-column" className='flex flex-col items-center sm:items-start text-center sm:text-left'>
                         <h3 className="font-bold text-gray-900 mb-6 text-lg">Support &amp; resources</h3>
                         <ul className="space-y-4">
                             <li><a className="text-gray-500 hover:text-brand transition-colors" href="#">Help Center</a></li>
