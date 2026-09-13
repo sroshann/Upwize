@@ -5,7 +5,7 @@ function Footer() {
     return (
 
         // <!-- BEGIN: SiteFooter -->
-        <footer className="bg-white border-t border-gray-100 pt-16 pb-8 px-6 md:px-12 lg:px-24 w-full">
+        <footer className="bg-white border-gray-100 pt-16 pb-8 px-6 md:px-12 lg:px-24 w-full">
             <div className="max-w-7xl mx-auto">
                 {/* <!-- Top Section: Links and Contact --> */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">

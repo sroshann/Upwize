@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
 import BeforeElection from "./Pages/Admin/Before-Election/BeforeElection"
 import DuringElection from "./Pages/User/During-Election/DuringElection"
+import AddParty from "./Pages/Admin/Add-Party/AddParty"
 import Footer from "./components/Footer/Footer"
 
 function App() {
@@ -13,8 +14,14 @@ function App() {
 
             <Navbar />
             <Routes>
+
+                {/* Admin */}
                 <Route path="/admin/before-election" element={<BeforeElection />} />
+                <Route path="/admin/add-party" element={<AddParty />} />
+
+                {/* User */}
                 <Route path="/user/during-election" element={<DuringElection />} />
+
             </Routes>
             <Footer />
 
