@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
+import { useEffect } from "react"
 
 import Navbar from "./components/Navbar/Navbar"
 import BeforeElection from "./Pages/Admin/Before-Election/BeforeElection"
@@ -9,6 +10,11 @@ import UserBeforeElection from "./Pages/User/Before-Election/Before-Election"
 import Footer from "./components/Footer/Footer"
 
 function App() {
+
+    // Avoid unwanted scroll when navigate to different pages
+    // Note: It is the default behaviour of react router dom
+    const { pathname } = useLocation()
+    useEffect(() => { window.scrollTo(0, 0) }, [pathname])
 
     return (
 

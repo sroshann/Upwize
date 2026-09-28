@@ -2,27 +2,29 @@ import React from 'react'
 import backgroundImage from '../../../assets/Common/Shape Image.png'
 import addPositionImg from '../../../assets/Admin/Before election/add-position.png'
 import addGuidelines from '../../../assets/Admin/Before election/add-guidelines.png'
+import { useNavigate } from 'react-router-dom'
 
 function BeforeElection() {
 
+    const navigate = useNavigate()
     return (
 
-        <section class="bg-gradient-to-b from-[#0865FF] to-white text-black min-h-screen flex flex-col antialiased bg-grid relative">
+        <section className="bg-gradient-to-b from-[#0865FF] to-white text-black min-h-screen flex flex-col antialiased bg-grid relative">
 
             {/* <!-- Main Content (Hero) --> */}
             <main
-                class="flex-grow flex flex-col justify-start items-center px-[20px] md:px-[80px] md:pt-15 pt-12 pb-20 relative z-10 w-full bg-cover bg-center bg-no-repeat"
+                className="flex-grow flex flex-col justify-start items-center px-[20px] md:px-[80px] md:pt-15 pt-12 pb-20 relative z-10 w-full bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(${backgroundImage})` }}>
 
                 {/* <!-- Desktop Layout (Split) --> */}
-                <div class="hidden md:flex w-full max-w-7xl mx-auto flex-col">
-                    <h1 class="text-[120px] leading-none tracking-[-0.04em] font-bold uppercase text-left text-white w-full max-w-[1200px]">
+                <div className="hidden md:flex w-full max-w-7xl mx-auto flex-col">
+                    <h1 className="text-[120px] leading-none tracking-[-0.04em] font-bold uppercase text-left text-white w-full max-w-[1200px]">
                         START A NEW<br />
-                        <span class="block text-right pr-20">WAVE</span>
+                        <span className="block text-right pr-20">WAVE</span>
                     </h1>
                     <div
-                        class="w-full max-w-2xl text-left  mt-[-70px]">
-                        <p class="text-xl leading-[30px] font-normal text-white">
+                        className="w-full max-w-2xl text-left  mt-[-70px]">
+                        <p className="text-xl leading-[30px] font-normal text-white">
                             Configure all the required details, including political associations, positions, candidates, and
                             administrators, to host a new election.
                         </p>
@@ -45,7 +47,10 @@ function BeforeElection() {
                 {/* <!-- Bento Grid --> */}
                 <div className="md:w-full w-[95%] max-w-7xl mx-auto md:mt-24 mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
                     {/* Card 1: Add a political association */}
-                    <div className="bg-[#f9f9f9] md:rounded-[32px] rounded-3xl p-8 shadow-sm flex flex-col justify-between transition-transform duration-300 md:hover:scale-106 hover:scale-104">
+                    <div
+                        className="bg-[#f9f9f9] md:rounded-[32px] rounded-3xl p-8 shadow-sm flex flex-col justify-between transition-transform duration-300 md:hover:scale-106 hover:scale-104"
+                        onClick={() => navigate('/admin/add-party')}
+                    >
                         <div>
                             <h2 className="text-2xl font-bold text-black mb-1">Add a political association</h2>
                             <p className="text-gray-500 mb-6">Create an identity that can people follow</p>
@@ -76,7 +81,10 @@ function BeforeElection() {
                     </div>
 
                     {/* Card 2: Add position of standing */}
-                    <div className="bg-[#f9f9f9] md:rounded-[32px] rounded-3xl p-8 shadow-sm flex flex-col justify-between transition-transform duration-300 md:hover:scale-106 hover:scale-104">
+                    <div
+                        className="bg-[#f9f9f9] md:rounded-[32px] rounded-3xl p-8 shadow-sm flex flex-col justify-between transition-transform duration-300 md:hover:scale-106 hover:scale-104"
+                        onClick={() => navigate('/admin/add-position')}
+                    >
                         <div>
                             <h2 className="text-2xl font-bold text-black mb-1">Add position of standing</h2>
                             <p className="text-gray-500 mb-6">Specify each roles or seats in which candidates can compete</p>
