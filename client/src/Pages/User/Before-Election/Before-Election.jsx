@@ -21,28 +21,39 @@ export default function BeforeElectionUser() {
 
                 {/* ── Hero Section ── */}
                 <section className="max-w-6xl mx-auto px-6 pt-20 pb-16">
-                    <div className="flex flex-col">
-                        <h1 className="text-6xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tight text-white leading-none uppercase">
-                            YOUR VOICE, YOUR
+                    {/* <!-- Desktop Layout (Split) --> */}
+                    <div className="hidden md:flex w-full max-w-7xl mx-auto flex-col">
+                        <h1 className="text-[120px] leading-none tracking-[-0.04em] font-bold uppercase text-left text-white w-full max-w-[1200px]">
+                            YOUR VOICE, YOUR<br />
+                            <span className="block text-right pr-20">LEADER</span>
                         </h1>
-                        <div className="flex flex-col md:flex-row md:items-end justify-between mt-3 gap-6">
-                            <p className="text-white/95 text-lg sm:text-xl max-w-lg font-normal leading-snug">
+                        <div
+                            className="w-full max-w-2xl text-left  mt-[-70px]">
+                            <p className="md:w-[94%] text-xl leading-[30px] font-normal text-white">
                                 Browse every candidate, learn about their manifesto, achievements,
                                 and aspirations before casting your vote.
                             </p>
-                            <h1 className="text-6xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tight text-white leading-none uppercase text-right md:text-right">
-                                LEADER
-                            </h1>
                         </div>
+                    </div>
+                    <div
+                        className="flex md:hidden w-full flex-col text-center">
+                        <h1 className="text-[55px] leading-[65px] tracking-[-0.02em] font-bold uppercase text-white mb-6">
+                            YOUR VOICE<br />
+                            YOUR LEADER
+                        </h1>
+                        <p className="text-[20px] leading-[30px] font-normal text-white">
+                            Browse every candidate, learn about their manifesto, achievements,
+                            and aspirations before casting your vote.
+                        </p>
                     </div>
                 </section>
 
                 {/* ── Chairperson Section ── */}
-                <section className="max-w-6xl mx-auto px-6 pt-10 pb-16">
-                    <h2 className="text-center text-4xl sm:text-5xl font-extrabold tracking-normal text-white uppercase mb-12 drop-shadow-sm">
+                <section className="max-w-6xl mx-auto pt-6 sm:pt-10 pb-10 sm:pb-16 px-2 sm:px-6">
+                    <h2 className="text-center text-3xl sm:text-5xl font-extrabold tracking-normal text-white uppercase mb-6 sm:mb-12 drop-shadow-sm">
                         CHAIRPERSON
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-3 gap-1.5 sm:gap-4 md:gap-8">
                         {chairpersonCandidates.map((candidate, idx) => (
                             <CandidateCard key={idx} {...candidate} />
                         ))}
@@ -50,11 +61,11 @@ export default function BeforeElectionUser() {
                 </section>
 
                 {/* ── Vice Chairperson Section ── */}
-                <section className="max-w-6xl mx-auto px-6 pt-6 pb-8">
-                    <h2 className="text-center text-4xl sm:text-5xl font-extrabold tracking-normal text-white uppercase mb-12 drop-shadow-sm">
+                <section className="max-w-6xl mx-auto pt-4 sm:pt-6 pb-8 px-2 sm:px-6">
+                    <h2 className="text-center text-3xl sm:text-5xl font-extrabold tracking-normal text-white uppercase mb-6 sm:mb-12 drop-shadow-sm">
                         VICE CHAIRPERSON
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-3 gap-1.5 sm:gap-4 md:gap-8">
                         {viceChairpersonCandidates.map((candidate, idx) => (
                             <CandidateCard key={idx} {...candidate} />
                         ))}
