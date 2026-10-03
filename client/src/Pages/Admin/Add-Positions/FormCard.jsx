@@ -13,6 +13,7 @@ function FormCard({
     program, setProgram,
     department, setDepartment,
     description, setDescription,
+    handleSubmit
 }) {
 
     const [showCategory, setShowCategory] = useState(false) // Set whether category is required
@@ -127,7 +128,7 @@ function FormCard({
                 <label className="block text-black text-sm font-medium mb-1.5">Description</label>
                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} placeholder="Describe about your association, in form of slogan, reflecting your personal views and objectives" className="w-full border border-[#E0E0E0] rounded-lg px-4 py-2.5 text-sm text-black placeholder-[#616161] font-normal focus:outline-none focus:border-[#0865FF] focus:ring-1 focus:ring-[#0865FF] transition-all duration-200 bg-white resize-none leading-relaxed" />
             </div>
-            <button type="submit" className="w-full bg-[#1a1a2e] hover:bg-[#0101DB] text-white font-semibold text-sm md:text-base py-3.5 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 mt-1">
+            <button onClick={handleSubmit} type="submit" className="w-full bg-[#1a1a2e] hover:bg-[#0101DB] text-white font-semibold text-sm md:text-base py-3.5 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 mt-1">
                 Create association
             </button>
         </div>

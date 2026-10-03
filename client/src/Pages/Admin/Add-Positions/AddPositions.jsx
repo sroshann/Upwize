@@ -2,6 +2,7 @@
 import backgroundImage from "../../../assets/Common/Shape Image.png"
 import { BULLET_POINTS } from "./AddPositionData"
 import FormCard from "./FormCard"
+import AddedPositions from "./AddedPositions"
 
 function AddPositions() {
     const [positionName, setPositionName] = useState("")
@@ -9,11 +10,12 @@ function AddPositions() {
     const [responsibilities, setResponsibilities] = useState([])
     const [shortName, setShortName] = useState("")
     const [belongsTo, setBelongsTo] = useState("No")
-    const [category, setCategory] = useState("")
+    const [category, setCategory] = useState(null)
     const [gender, setGender] = useState("")
     const [program, setProgram] = useState("")
     const [department, setDepartment] = useState("")
     const [description, setDescription] = useState("")
+    const [positions, setPositions] = useState([])
 
     const handleResponsibilityKeyDown = (e) => {
         if ((e.key === "Enter" || e.key === ",") && responsibilityInput.trim()) {
@@ -30,6 +32,36 @@ function AddPositions() {
         setResponsibilities(responsibilities.filter((r) => r !== tag))
     }
 
+    // NEED TO ADD FORMIK
+    const handleSubmit = () => {
+
+        if (!positionName.trim() || !responsibilities || !description.trim()) return
+
+        const newPosition = {
+            id: Date.now(),
+            positionName,
+            responsibilities,
+            shortName: shortName?.trim() || null,
+            category: category?.trim() || null,
+            gender: gender?.trim() || null,
+            program: program?.trim() || null,
+            department: department?.trim() || null,
+            description,
+        }
+        setPositions(prev => [newPosition, ...prev])
+        // Reset form
+        setPositionName("")
+        setResponsibilityInput("")
+        setResponsibilities([])
+        setShortName("")
+        setBelongsTo("No")
+        setCategory("")
+        setGender("")
+        setProgram("")
+        setDepartment("")
+        setDescription("")
+    }
+
     const formProps = {
         positionName, setPositionName,
         responsibilityInput, setResponsibilityInput,
@@ -41,6 +73,7 @@ function AddPositions() {
         program, setProgram,
         department, setDepartment,
         description, setDescription,
+        handleSubmit
     }
 
     return (
@@ -87,7 +120,9 @@ function AddPositions() {
                         </div>
                     </div>
 
+                    {positions.length > 0 && <AddedPositions data={positions} setFunction={setPositions} />}
                 </div>
+
             </main>
         </section>
     )
