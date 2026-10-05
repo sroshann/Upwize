@@ -1,10 +1,26 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeParty } from '../../../store/slices/allParties.slice'
+import toast from 'react-hot-toast'
+import { toastStyle } from '../../../lib/toast.lib'
+import { removeAssociation } from '../../../api/admin/before-election'
 
-function AddedParties({ data, setFunction }) {
+function AddedParties() {
 
-    const handleRemoveParty = (id) => {
-        setFunction(prev => prev.filter(p => p.id !== id))
-        if (data?.length === 0) setFunction([])
+    const { allParties } = useSelector(state => state.association)
+    const dispatch = useDispatch()
+
+    // NEED TO CHANGE INTO REACT QUERY
+    const handleRemove = async (id) => {
+
+        try {
+
+            const message = await removeAssociation(id)
+            dispatch(removeParty(id))
+            toast.success(message, { style: toastStyle })
+
+        } catch (error) { toast.error(error?.response?.data?.message, { style: toastStyle }) }
+
     }
 
     return (
@@ -13,9 +29,9 @@ function AddedParties({ data, setFunction }) {
 
                 {/* Cards grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {data.map(item => (
+                    {allParties.map(item => (
                         <div
-                            key={item.id}
+                            key={item?._id}
                             className="bg-white w-[97%] md:w-full mx-auto rounded-xl md:rounded-2xl p-5 flex flex-col gap-4 shadow-lg transition-transform duration-300 md:hover:scale-102"
                         >
                             {/* Top row: logo · names · color */}
@@ -72,7 +88,7 @@ function AddedParties({ data, setFunction }) {
                             {/* Remove button */}
                             <button
                                 type="button"
-                                onClick={() => handleRemoveParty(item.id)}
+                                onClick={() => handleRemove(item?._id)}
                                 className="w-full mt-auto bg-[#1a1a2e] hover:bg-red-600 text-white text-sm font-semibold py-2.5 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-red-500/20 hover:-translate-y-0.5 cursor-pointer"
                             >
                                 Remove

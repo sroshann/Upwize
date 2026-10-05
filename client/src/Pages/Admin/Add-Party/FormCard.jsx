@@ -1,17 +1,27 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
+import { addPartyFormik } from '../../../formik/admin/before-election'
 
-function FormCard({
-    logoPreview,
-    partyColor,
-    setPartyColor,
-    fullName, setFullName,
-    shortName, setShortName,
-    description, setDescription,
-    fileInputRef,
-    handleLogoUpload,
-    handleSubmit,
-    setLogoPreview
-}) {
+function FormCard() {
+
+    const [logoPreview, setLogoPreview] = useState(null) // To preview logo
+    const fileInputRef = useRef(null)
+
+    const formik = addPartyFormik({ setLogoPreview, fileInputRef })
+
+    const handleLogoUpload = (e) => {
+        const file = e.target.files[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.onloadend = () => {
+
+                setLogoPreview(reader.result)
+                formik.setFieldValue('logo', reader.result)
+
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+
     return (
         <div className="md:w-full w-[97%] mx-auto bg-white rounded-2xl md:rounded-3xl p-5 md:p-7 shadow-lg">
 
@@ -63,7 +73,7 @@ function FormCard({
 
             </div>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
 
                 {/* Full name */}
                 <div>
@@ -72,8 +82,7 @@ function FormCard({
                     </label>
                     <input
                         type="text"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
+                        {...formik.getFieldProps('fullName')}
                         placeholder="Provide full name of association"
                         className="bg-[#F8F8F8] w-full border border-[#E0E0E0] rounded-lg px-4 py-2.5 text-sm text-black placeholder-[#616161] font-normal focus:outline-none focus:border-[#0865FF] focus:ring-1 focus:ring-[#0865FF] transition-all duration-200 bg-white"
                     />
@@ -87,8 +96,7 @@ function FormCard({
                         </label>
                         <input
                             type="text"
-                            value={shortName}
-                            onChange={(e) => setShortName(e.target.value)}
+                            {...formik.getFieldProps('shortName')}
                             placeholder="Provide short name"
                             className="w-full border border-[#E0E0E0] rounded-lg px-4 py-2.5 text-sm text-black placeholder-[#616161] font-normal focus:outline-none focus:border-[#0865FF] focus:ring-1 focus:ring-[#0865FF] transition-all duration-200 bg-white"
                         />
@@ -100,18 +108,17 @@ function FormCard({
                         </label>
                         <div className="flex items-center border border-[#E0E0E0] rounded-lg px-3 py-2 gap-2 bg-white h-[42px] focus-within:border-[#0865FF] focus-within:ring-1 focus-within:ring-[#0865FF] transition-all duration-200">
                             <span className="text-sm text-[#616161] font-normal flex-1 truncate uppercase">
-                                {partyColor}
+                                {formik.values.color}
                             </span>
                             <label className="cursor-pointer flex-shrink-0 relative">
                                 <input
                                     type="color"
-                                    value={partyColor}
-                                    onChange={(e) => setPartyColor(e.target.value)}
+                                    {...formik.getFieldProps('color')}
                                     className="opacity-0 absolute inset-0 w-full h-full cursor-pointer"
                                 />
                                 <span
                                     className="block w-6 h-6 rounded-full border-2 border-white shadow-md transition-transform duration-200 hover:scale-110"
-                                    style={{ backgroundColor: partyColor }}
+                                    style={{ backgroundColor: formik.values.color }}
                                 />
                             </label>
                         </div>
@@ -124,8 +131,7 @@ function FormCard({
                         Description
                     </label>
                     <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        {...formik.getFieldProps('description')}
                         placeholder="Describe about your association, in form of slogan, reflecting your perspectives and objectives"
                         rows={4}
                         className="w-full border border-[#E0E0E0] rounded-lg px-4 py-2.5 text-sm text-black placeholder-[#616161] font-normal focus:outline-none focus:border-[#0865FF] focus:ring-1 focus:ring-[#0865FF] transition-all duration-200 bg-white resize-none leading-relaxed"
@@ -136,9 +142,7 @@ function FormCard({
                 <button
                     type="submit"
                     className="w-full bg-[#1a1a2e] hover:bg-[#0101DB] text-white font-semibold text-sm md:text-base py-3.5 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 mt-1"
-                >
-                    Create association
-                </button>
+                >Create association</button>
             </form>
         </div>
     )
