@@ -1,13 +1,16 @@
 import { Association } from "../../models/association.model.js"
+import { validateImage } from "../../util/validateFile.util.js"
+import { uploadToCloudinary } from '../../lib/cloudinary.lib.js'
 
-// NEED TO INTEGRATE CLOUDINARY AND REDIS
+// NEED TO INTEGRATE REDIS
 
 // Add association
 export const addAssociation = async (request, response) => {
 
     try {
 
-        const { fullName, shortName, logo, color, description } = request?.body
+        const { fullName, shortName, color, description } = request?.body
+        let { logo } = request?.body
 
         // Checking whether this details already exist or not
         const party = await Association.findOne({
@@ -23,6 +26,19 @@ export const addAssociation = async (request, response) => {
             else if (party?.color.some(c => c === color))
                 return response.status(400).json({ message: "Color is already taken" })
             else if (party?.logo === logo) return response?.status(400).json({ error: 'Logo is already used' })
+
+        }
+
+        if (logo) {
+
+            // Validating uploaded logo as valid BS6 and image size
+            const imageResult = validateImage(logo)
+            if (imageResult?.error) return response.status(400).json({ message: imageResult?.message })
+
+            const cloudinary = await uploadToCloudinary(imageResult?.file)
+            if (cloudinary?.error) return response.status(400).json({ message: cloudinary?.message })
+
+            logo = cloudinary?.url
 
         }
 
