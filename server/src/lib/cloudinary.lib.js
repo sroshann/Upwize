@@ -25,6 +25,6 @@ export const uploadToCloudinary = async (file) => {
 
         return { url: result.url, error: false }
 
-    } catch (error) { return { message: 'Error on uploading image', error: true } }
+    } catch (error) { return { message: error.message, error: true } }
 
 }

@@ -1,6 +1,7 @@
 import { Association } from "../../models/association.model.js"
 import { validateImage } from "../../util/validateFile.util.js"
 import { uploadToCloudinary } from '../../lib/cloudinary.lib.js'
+import { redisClient } from "../../lib/redis.lib.js"
 
 // NEED TO INTEGRATE REDIS
 
@@ -49,6 +50,9 @@ export const addAssociation = async (request, response) => {
         if (newParty) {
 
             const { __v, ...rest } = newParty.toObject()
+            // Storing the new party in Redis cache
+            await redisClient.hSet('associations', rest?._id.toString(), JSON.stringify(rest))
+            await redisClient.expire('associations', 1800) // Setting its TTL as 30 minutes
             return response?.status(200).json({
 
                 message: `New Association "${shortName}" created`,
@@ -57,7 +61,6 @@ export const addAssociation = async (request, response) => {
             })
 
         }
-
 
     } catch (error) { return response.status(500).json({ message: "Error on adding association" }) }
 
@@ -74,6 +77,7 @@ export const removeAssociation = async (request, response) => {
         const { id } = request?.body
 
         const deletedAssociation = await Association.findByIdAndDelete(id)
+        await redisClient.hDel('associations', id)
         if (!deletedAssociation) return response.status(404).json({ message: 'Association not found' })
         return response.status(200).json({ message: 'Association removed successfully' })
 

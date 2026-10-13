@@ -4,6 +4,7 @@ import cors from 'cors'
 import { createServer } from 'http'
 import { connectDB } from './util/database.js'
 import beforeElection from './routes/admin/before-election.js'
+import { connectRedis } from './lib/redis.lib.js'
 
 dotenv.config()
 const app = express()
@@ -24,5 +25,6 @@ server.listen(process.env.PORT, () => {
 
     console.log('Server is runnning')
     connectDB()
+    connectRedis()
 
 })
