@@ -8,7 +8,7 @@ export const addAssociation = async (data) => {
         const response = await axiosInstance.post('/admin/before-election/add-association', data)
         return response?.data
 
-    } catch (error) { throw error }
+    } catch (error) { throw error?.response?.data?.message }
 
 }
 
@@ -19,7 +19,7 @@ export const getAllParties = async () => {
 
 
 
-    } catch (error) { throw error }
+    } catch (error) { throw error?.response?.data?.message }
 
 }
 
@@ -33,6 +33,6 @@ export const removeAssociation = async (id) => {
         const { message } = response?.data
         return message
 
-    } catch (error) { throw error }
+    } catch (error) { throw error?.response?.data?.message }
 
 }

@@ -1,5 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { addPartyFormik } from '../../../formik/admin/before-election'
+import toast from 'react-hot-toast'
+import { toastStyle } from '../../../lib/toast.lib'
+import { validateImage } from '../../../utils/validate.utils'
 
 function FormCard() {
 
@@ -9,17 +12,24 @@ function FormCard() {
     const formik = addPartyFormik({ setLogoPreview, fileInputRef })
 
     const handleLogoUpload = (e) => {
+
         const file = e.target.files[0]
-        if (file) {
-            const reader = new FileReader()
-            reader.onloadend = () => {
+        if (!file) return
 
-                setLogoPreview(reader.result)
-                formik.setFieldValue('logo', reader.result)
-
-            }
-            reader.readAsDataURL(file)
+        // Validating uploaded image
+        const { error, message } = validateImage(file)
+        if (error) {
+            toast.error(message, { style: toastStyle })
+            e.target.value = '' // reset the input so the same file can be re-selected
+            return
         }
+
+        const reader = new FileReader()
+        reader.onloadend = () => {
+            setLogoPreview(reader.result)
+            formik.setFieldValue('logo', reader.result)
+        }
+        reader.readAsDataURL(file)
     }
 
     return (
@@ -60,6 +70,7 @@ function FormCard() {
                                 setLogoPreview(null)
                                 // Reset input so the same file can be re-selected later
                                 if (fileInputRef.current) fileInputRef.current.value = ''
+                                formik.setFieldValue('logo', null)
                             }}
                             className="absolute top-0 right-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:text-white hover:bg-red-500 transition-all duration-200 cursor-pointer flex-shrink-0 overflow-hidden"
                         >

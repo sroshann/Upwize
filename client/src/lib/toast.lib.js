@@ -4,6 +4,7 @@ export const toastStyle = {
     background: '#333',
     color: '#fff',
     fontSize: '14px',
-    fontFamily: 'Nexa Light'
+    fontWeight: 700,
+    fontFamily: "'Plus Jakarta Sans', sans-serif"
 
 }

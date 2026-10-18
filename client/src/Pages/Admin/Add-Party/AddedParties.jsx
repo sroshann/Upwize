@@ -19,7 +19,7 @@ function AddedParties() {
             dispatch(removeParty(id))
             toast.success(message, { style: toastStyle })
 
-        } catch (error) { toast.error(error?.response?.data?.message, { style: toastStyle }) }
+        } catch (error) { toast.error(error, { style: toastStyle }) }
 
     }
 

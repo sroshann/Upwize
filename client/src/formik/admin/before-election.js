@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux"
 import { addParty } from "../../store/slices/allParties.slice"
 import toast from 'react-hot-toast'
 import { toastStyle } from "../../lib/toast.lib"
+import { validateAddAssociation } from "../../utils/validate.utils"
 
 // NEED TO ALSO INTEFRATE REACT TANSACK QUERY ALSO HERE
 
@@ -22,6 +23,12 @@ export const addPartyFormik = ({ setLogoPreview, fileInputRef }) => {
             description: ''
 
         },
+        validate: values => {
+
+            const { error, message } = validateAddAssociation(values)
+            if (error) toast.error(message, { style: toastStyle })
+
+        },
         validateOnBlur: false,
         validateOnChange: false,
         validateOnMount: false,
@@ -33,7 +40,7 @@ export const addPartyFormik = ({ setLogoPreview, fileInputRef }) => {
                 dispatch(addParty(data)) // Adding the new party into redux
                 toast.success(message, { style: toastStyle })
 
-            } catch (error) { toast.error(error?.response?.data?.message || 'Something went wrong', { style: toastStyle }) }
+            } catch (error) { toast.error(error || 'Something went wrong', { style: toastStyle }) }
 
             // Resetting the form
             if (fileInputRef?.current) fileInputRef.current.value = ''
