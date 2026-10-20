@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
 import backgroundImage from '../../../assets/Common/Shape Image.png'
 import { bulletPoints } from './AddPartyData'
 import FormCard from './FormCard'
 import AddedParties from './AddedParties'
-import { useSelector } from 'react-redux'
+import { useQuery } from '@tanstack/react-query'
 
 function AddParty() {
 
-    const { allParties } = useSelector(state => state.association)
+    const { data: recentlyAdded } = useQuery({
+
+        queryKey: ['associations', 'recently-added'],
+        queryFn: () => {},
+        enabled: false
+
+    })
 
     return (
         <section className="bg-gradient-to-b from-[#0865FF] to-white min-h-screen flex flex-col antialiased">
@@ -71,7 +76,7 @@ function AddParty() {
                     </div>
                 </div>
 
-                {allParties.length > 0 && <AddedParties />}
+                { recentlyAdded && recentlyAdded.length > 0 && <AddedParties associations={ recentlyAdded } />}
             </main>
 
         </section>

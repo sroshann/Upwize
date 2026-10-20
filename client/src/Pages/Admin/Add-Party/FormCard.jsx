@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { addPartyFormik } from '../../../formik/admin/before-election'
+import { addPartyFormik } from '../../../formik/admin/before-election.formik'
 import toast from 'react-hot-toast'
 import { toastStyle } from '../../../lib/toast.lib'
 import { validateImage } from '../../../utils/validate.utils'

@@ -22,11 +22,11 @@ export const addAssociation = async (request, response) => {
         if (party) {
 
             if (party?.fullName === fullName)
-                return response.status(400).json({ message: "Party name is already taken" })
-            else if (party?.shortName === shortName) return response.status(400).json({ message: "Short name is already taken" })
+                return response.status(409).json({ message: "Party name is already taken" })
+            else if (party?.shortName === shortName) return response.status(409).json({ message: "Short name is already taken" })
             else if (party?.color.some(c => c === color))
-                return response.status(400).json({ message: "Color is already taken" })
-            else if (party?.logo === logo) return response?.status(400).json({ error: 'Logo is already used' })
+                return response.status(409).json({ message: "Color is already taken" })
+            else if (party?.logo === logo) return response?.status(409).json({ message: 'Logo is already used' })
 
         }
 

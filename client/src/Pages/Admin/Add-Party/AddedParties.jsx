@@ -1,14 +1,8 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { removeParty } from '../../../store/slices/allParties.slice'
 import toast from 'react-hot-toast'
 import { toastStyle } from '../../../lib/toast.lib'
-import { removeAssociation } from '../../../api/admin/before-election'
+import { removeAssociation } from '../../../api/admin/before-election.api'
 
-function AddedParties() {
-
-    const { allParties } = useSelector(state => state.association)
-    const dispatch = useDispatch()
+function AddedParties({ associations }) {
 
     // NEED TO CHANGE INTO REACT QUERY
     const handleRemove = async (id) => {
@@ -16,7 +10,6 @@ function AddedParties() {
         try {
 
             const message = await removeAssociation(id)
-            dispatch(removeParty(id))
             toast.success(message, { style: toastStyle })
 
         } catch (error) { toast.error(error, { style: toastStyle }) }
@@ -29,7 +22,7 @@ function AddedParties() {
 
                 {/* Cards grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {allParties.map(item => (
+                    {associations.map(item => (
                         <div
                             key={item?._id}
                             className="bg-white w-[97%] md:w-full mx-auto rounded-xl md:rounded-2xl p-5 flex flex-col gap-4 shadow-lg transition-transform duration-300 md:hover:scale-102"
