@@ -3,16 +3,25 @@ import { bulletPoints } from './AddPartyData'
 import FormCard from './FormCard'
 import AddedParties from './AddedParties'
 import { useQuery } from '@tanstack/react-query'
+import { queryClient, queryKeys } from '../../../lib/tanstack'
+import { useEffect } from 'react'
 
 function AddParty() {
 
-    const { data: recentlyAdded } = useQuery({
+    const { data: recentlyAdded = [] } = useQuery({
 
-        queryKey: ['associations', 'recently-added'],
+        queryKey: queryKeys.rcntAssociation(),
         queryFn: () => {},
-        enabled: false
+        enabled: false,
 
     })
+    
+    useEffect(() => {
+
+        // Resetting recently added cache into empty
+        return () => queryClient.removeQueries({ queryKey: queryKeys.rcntAssociation() })
+
+    }, [ queryClient ])
 
     return (
         <section className="bg-gradient-to-b from-[#0865FF] to-white min-h-screen flex flex-col antialiased">

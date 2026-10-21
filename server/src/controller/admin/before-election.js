@@ -3,8 +3,6 @@ import { validateImage } from "../../util/validateFile.util.js"
 import { uploadToCloudinary } from '../../lib/cloudinary.lib.js'
 import { redisClient } from "../../lib/redis.lib.js"
 
-// NEED TO INTEGRATE REDIS
-
 // Add association
 export const addAssociation = async (request, response) => {
 
@@ -55,7 +53,7 @@ export const addAssociation = async (request, response) => {
             await redisClient.expire('associations', 1800) // Setting its TTL as 30 minutes
             return response?.status(200).json({
 
-                message: `New Association "${shortName}" created`,
+                message: `New Association '${shortName}' created`,
                 data: rest
 
             })
@@ -75,14 +73,11 @@ export const removeAssociation = async (request, response) => {
     try {
 
         const { id } = request?.body
-
         const deletedAssociation = await Association.findByIdAndDelete(id)
         await redisClient.hDel('associations', id)
         if (!deletedAssociation) return response.status(404).json({ message: 'Association not found' })
         return response.status(200).json({ message: 'Association removed successfully' })
 
-    } catch (error) {
-        return response.status(500).json({ message: 'Error on removing association' })
-    }
+    } catch (error) { return response.status(500).json({ message: 'Error on removing association' }) }
 
 }
