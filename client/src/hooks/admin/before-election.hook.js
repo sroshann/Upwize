@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { addAssociation } from '../../api/admin/before-election.api'
+import { addAssociation, removeAssociation } from '../../api/admin/before-election.api'
 import { toastStyle } from '../../lib/toast.lib'
 import toast from 'react-hot-toast'
 
+// Adding association
 export const useAddAssociation = () => {
 
     const queryClient = useQueryClient()
@@ -20,6 +21,31 @@ export const useAddAssociation = () => {
 
     })
 
+    return { mutate }
+
+}
+
+// Removing association
+export const useRemoveAssociation = () => {
+
+    const queryClient = useQueryClient()
+    const { mutate } = useMutation({
+
+        mutationFn: removeAssociation,
+        onSuccess: (message, id) => {
+
+            // Association is also removed from cache
+            queryClient.setQueryData(['associations', 'recently-added'], (old = []) =>
+                old.filter(association => association._id !== id)
+            )
+            toast.success( message, { style: toastStyle } )
+
+        },
+        onError: error => toast.error( error, { style: toastStyle } ),
+        onSettled: () => toast.remove('remove-association') 
+
+    })   
+    
     return { mutate }
 
 }

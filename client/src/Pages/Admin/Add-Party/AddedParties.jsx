@@ -1,18 +1,14 @@
 import toast from 'react-hot-toast'
 import { toastStyle } from '../../../lib/toast.lib'
-import { removeAssociation } from '../../../api/admin/before-election.api'
+import { useRemoveAssociation } from '../../../hooks/admin/before-election.hook'
 
 function AddedParties({ associations }) {
 
-    // NEED TO CHANGE INTO REACT QUERY
-    const handleRemove = async (id) => {
+    const { mutate } = useRemoveAssociation()
+    const handleRemove = (id) => {
 
-        try {
-
-            const message = await removeAssociation(id)
-            toast.success(message, { style: toastStyle })
-
-        } catch (error) { toast.error(error, { style: toastStyle }) }
+        toast.loading('Removing association',{ id:'remove-association', style: toastStyle })
+        mutate(id)
 
     }
 
