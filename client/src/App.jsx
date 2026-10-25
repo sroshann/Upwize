@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom"
 import { useEffect } from "react"
 import { Toaster } from "react-hot-toast"
+import { useGetAssociations } from "./hooks/admin/before-election.hook"
 
 import Navbar from "./components/Navbar/Navbar"
 import BeforeElection from "./Pages/Admin/Before-Election/BeforeElection"
@@ -17,6 +18,7 @@ function App() {
     // Note: It is the default behaviour of react router dom
     const { pathname } = useLocation()
     useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+    useGetAssociations() // Prefetch associations on app load — errors handled globally
 
     return (
 

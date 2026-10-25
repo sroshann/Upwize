@@ -9,7 +9,13 @@ export const addAssociation = async (data) => {
 }
 
 // Get all parties
-export const getAllParties = async () => {}
+export const getAssociations = async () => {
+
+    const response = await axiosInstance.get('/admin/before-election/get-associations')
+    const { data } = response?.data
+    return data
+
+}
 
 // Remove association
 export const removeAssociation = async (id) => {

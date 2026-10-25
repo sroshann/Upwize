@@ -1,7 +1,7 @@
 import { Association } from "../../models/association.model.js"
 import { validateImage } from "../../util/validateFile.util.js"
 import { uploadToCloudinary } from '../../lib/cloudinary.lib.js'
-import { redisClient } from "../../lib/redis.lib.js"
+import { getRedisAllData, redisClient, redisCollections, setRedisHash, setRedisHashAll } from "../../lib/redis.lib.js"
 import Position from "../../models/position.model.js"
 import { isAlreadyInDB } from "../../util/database.js"
 
@@ -37,9 +37,7 @@ export const addAssociation = async (request, response) => {
         if (newParty) {
 
             const { __v, ...rest } = newParty.toObject()
-            // Storing the new party in Redis cache
-            await redisClient.hSet('associations', rest?._id.toString(), JSON.stringify(rest))
-            await redisClient.expire('associations', 1800) // Setting its TTL as 30 minutes
+            await setRedisHash( redisCollections.associations, rest, 1800 ) // Storing the new party in Redis cache
             return response?.status(200).json({
 
                 message: `New Association '${shortName}' created`,
@@ -54,7 +52,25 @@ export const addAssociation = async (request, response) => {
 }
 
 // Get all associations
-export const getAllAssociations = (request, response) => { }
+export const getAssociations = async (request, response) => { 
+
+    try {
+
+        // Getting the data from redis, if data not in redis it is fetched from database
+        const associationRedis = await getRedisAllData(redisCollections.associations)
+        if( associationRedis ) return response.status( 200 ).json({ data: associationRedis })
+        else {
+
+            const data = await Association.find().lean()
+            const formatted = data?.map(({ __v, ...rest }) => rest )
+            await setRedisHashAll( redisCollections.associations, formatted, 1800 )
+            return response?.status( 200 ).json({ data: formatted })
+
+        }
+
+    } catch ( error ) { return response.status( 500 ).json({ message: 'Error on getting associations' }) }
+
+}
 
 // Remove association
 export const removeAssociation = async (request, response) => {
@@ -63,7 +79,7 @@ export const removeAssociation = async (request, response) => {
 
         const { id } = request?.body
         const deletedAssociation = await Association.findByIdAndDelete(id)
-        await redisClient.hDel('associations', id)
+        await redisClient.hDel(redisCollections.associations, id)
         if (!deletedAssociation) return response.status(404).json({ message: 'Association not found' })
         return response.status(200).json({ message: 'Association removed successfully' })
 
@@ -98,8 +114,7 @@ export const addPositions = async (request, response) => {
         if( newData ) {
 
             const { __v, ...rest } = newData.toObject()
-            await redisClient.hSet('positions', rest?._id.toString(), JSON.stringify( rest ))
-            await redisClient.expire('positions', 1800)
+            await setRedisHash( redisCollections.positions, rest, 1800 )
             return response?.status( 200 ).json({ message: `${ rest?.position } added successfully`, data: rest })
 
         }
