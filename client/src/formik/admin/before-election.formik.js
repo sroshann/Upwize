@@ -23,7 +23,7 @@ export const addPartyFormik = ({ setLogoPreview, fileInputRef }) => {
         validateOnBlur: false,
         validateOnChange: false,
         validateOnMount: false,
-        onSubmit: async (values, { resetForm }) => {
+        onSubmit: (values, { resetForm }) => {
 
             toast.loading('Adding association', { id: 'add-association', style: toastStyle })
             mutate(values, {
@@ -38,6 +38,32 @@ export const addPartyFormik = ({ setLogoPreview, fileInputRef }) => {
                 }
 
             })
+
+        }
+
+    })
+
+}
+
+// Add position formik
+export const addPositionFormik = () => {
+
+    return useFormik({
+
+        initialValues: {
+
+            position: '', responsibilities: [], shortName: '', 
+            belongsTo: 'No', category: null, program: null, gender: null,
+            program: null, department: null
+
+        },
+        validateOnBlur: false,
+        validateOnMount: false,
+        validateOnChange: false,
+        onSubmit: ( values, { resetForm } ) => {
+
+            console.log( values )
+            resetForm()
 
         }
 

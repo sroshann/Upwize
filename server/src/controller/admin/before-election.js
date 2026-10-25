@@ -2,6 +2,8 @@ import { Association } from "../../models/association.model.js"
 import { validateImage } from "../../util/validateFile.util.js"
 import { uploadToCloudinary } from '../../lib/cloudinary.lib.js'
 import { redisClient } from "../../lib/redis.lib.js"
+import Position from "../../models/position.model.js"
+import { isAlreadyInDB } from "../../util/database.js"
 
 // Add association
 export const addAssociation = async (request, response) => {
@@ -11,22 +13,9 @@ export const addAssociation = async (request, response) => {
         const { fullName, shortName, color, description } = request?.body
         let { logo } = request?.body
 
-        // Checking whether this details already exist or not
-        const party = await Association.findOne({
-
-            $or: [{ fullName }, { shortName }, { color: { $in: color } }]
-
-        })
-        if (party) {
-
-            if (party?.fullName === fullName)
-                return response.status(409).json({ message: "Party name is already taken" })
-            else if (party?.shortName === shortName) return response.status(409).json({ message: "Short name is already taken" })
-            else if (party?.color.some(c => c === color))
-                return response.status(409).json({ message: "Color is already taken" })
-            else if (party?.logo === logo) return response?.status(409).json({ message: 'Logo is already used' })
-
-        }
+        // Checking whether the incoming data is already exist in database or not
+        const matched = await isAlreadyInDB(Association, { fullName, shortName, color })
+        if (matched) return response?.status(409).json({ message: `${matched} is already taken` })
 
         if (logo) {
 
@@ -79,5 +68,42 @@ export const removeAssociation = async (request, response) => {
         return response.status(200).json({ message: 'Association removed successfully' })
 
     } catch (error) { return response.status(500).json({ message: 'Error on removing association' }) }
+
+}
+
+// Add positions
+export const addPositions = async (request, response) => {
+
+    try {
+
+        const {
+
+            position, responsibilities, shortName, belongsTo,
+            category, program, department, gender, description
+
+        } = request?.body
+
+        // Checking whether the incoming data is already present in data or not
+        const matched = isAlreadyInDB(Position, { position, shortName })
+        if (matched) return response?.status(409).json({ message: `${matched} is already taken` })
+
+        const newData = new Position({ 
+            
+            position, responsibilities, shortName, belongsTo,
+            category, program, department, gender, description
+        
+        })
+        await newData.save()
+
+        if( newData ) {
+
+            const { __v, ...rest } = newData.toObject()
+            await redisClient.hSet('positions', rest?._id.toString(), JSON.stringify( rest ))
+            await redisClient.expire('positions', 1800)
+            return response?.status( 200 ).json({ message: `${ rest?.position } added successfully`, data: rest })
+
+        }
+
+    } catch (error) { return response?.status(500).json({ error: 'Error on adding position' }) }
 
 }

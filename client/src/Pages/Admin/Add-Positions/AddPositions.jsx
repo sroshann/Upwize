@@ -1,80 +1,9 @@
-﻿import React, { useState } from "react"
-import backgroundImage from "../../../assets/Common/Shape Image.png"
+﻿import backgroundImage from "../../../assets/Common/Shape Image.png"
 import { BULLET_POINTS } from "./AddPositionData"
 import FormCard from "./FormCard"
 import AddedPositions from "./AddedPositions"
 
 function AddPositions() {
-    const [positionName, setPositionName] = useState("")
-    const [responsibilityInput, setResponsibilityInput] = useState("")
-    const [responsibilities, setResponsibilities] = useState([])
-    const [shortName, setShortName] = useState("")
-    const [belongsTo, setBelongsTo] = useState("No")
-    const [category, setCategory] = useState(null)
-    const [gender, setGender] = useState("")
-    const [program, setProgram] = useState("")
-    const [department, setDepartment] = useState("")
-    const [description, setDescription] = useState("")
-    const [positions, setPositions] = useState([])
-
-    const handleResponsibilityKeyDown = (e) => {
-        if ((e.key === "Enter" || e.key === ",") && responsibilityInput.trim()) {
-            e.preventDefault()
-            const val = responsibilityInput.trim().replace(/,$/, "")
-            if (val && !responsibilities.includes(val)) {
-                setResponsibilities([...responsibilities, val])
-            }
-            setResponsibilityInput("")
-        }
-    }
-
-    const removeResponsibility = (tag) => {
-        setResponsibilities(responsibilities.filter((r) => r !== tag))
-    }
-
-    // NEED TO ADD FORMIK
-    const handleSubmit = () => {
-
-        if (!positionName.trim() || !responsibilities || !description.trim()) return
-
-        const newPosition = {
-            id: Date.now(),
-            positionName,
-            responsibilities,
-            shortName: shortName?.trim() || null,
-            category: category?.trim() || null,
-            gender: gender?.trim() || null,
-            program: program?.trim() || null,
-            department: department?.trim() || null,
-            description,
-        }
-        setPositions(prev => [newPosition, ...prev])
-        // Reset form
-        setPositionName("")
-        setResponsibilityInput("")
-        setResponsibilities([])
-        setShortName("")
-        setBelongsTo("No")
-        setCategory("")
-        setGender("")
-        setProgram("")
-        setDepartment("")
-        setDescription("")
-    }
-
-    const formProps = {
-        positionName, setPositionName,
-        responsibilityInput, setResponsibilityInput,
-        responsibilities, handleResponsibilityKeyDown, removeResponsibility,
-        shortName, setShortName,
-        belongsTo, setBelongsTo,
-        category, setCategory,
-        gender, setGender,
-        program, setProgram,
-        department, setDepartment,
-        description, setDescription,
-        handleSubmit
-    }
 
     return (
         <section className="min-h-screen w-full relative overflow-hidden" style={{ background: "linear-gradient(to bottom, #0865FF 0%, #ffffff 100%)" }}>
@@ -97,7 +26,7 @@ function AddPositions() {
                             </ul>
                         </div>
                         <div className="w-full max-w-[480px] xl:max-w-[520px] flex-shrink-0">
-                            <FormCard {...formProps} />
+                            <FormCard />
                         </div>
                     </div>
 
@@ -116,11 +45,11 @@ function AddPositions() {
                             </ul>
                         </div>
                         <div className="w-full max-w-[540px] md:w-full md:max-w-[580px]">
-                            <FormCard {...formProps} />
+                            <FormCard />
                         </div>
                     </div>
 
-                    {positions.length > 0 && <AddedPositions data={positions} setFunction={setPositions} />}
+                    {/* {positions.length > 0 && <AddedPositions />} */}
                 </div>
 
             </main>
