@@ -1,5 +1,5 @@
 import React from 'react'
-import backgroundImage from '../../../../assets/Common/Shape Image.png'
+import backgroundImage from '../../../assets/Common/Shape Image.png'
 import candidate from './BasicDetails'
 
 export default function ViewCandidate() {
