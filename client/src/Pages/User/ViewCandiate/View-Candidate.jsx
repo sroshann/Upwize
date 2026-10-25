@@ -1,8 +1,12 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 import backgroundImage from '../../../assets/Common/Shape Image.png'
-import candidate from './BasicDetails'
+import fallbackCandidate from './BasicDetails'
 
 export default function ViewCandidate() {
+    const { state } = useLocation()
+    const candidate = state?.candidate ?? fallbackCandidate
+
     return (
         <section
             className="text-black min-h-screen flex flex-col antialiased relative"
