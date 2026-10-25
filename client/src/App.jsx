@@ -10,6 +10,7 @@ import AddPositions from "./Pages/Admin/Add-Positions/AddPositions"
 import UserBeforeElection from "./Pages/User/Before-Election/Before-Election"
 import Footer from "./components/Footer/Footer"
 import AddGuidelines from "./Pages/Admin/Add-Guidelines/AddGuidelines"
+import Login from "./Pages/Login/login"
 
 function App() {
 
@@ -34,6 +35,9 @@ function App() {
                 {/* User */}
                 <Route path="/user/before-election" element={<UserBeforeElection />} />
                 <Route path="/user/during-election" element={<DuringElection />} />
+
+                {/* Auth */}
+                <Route path="/login" element={<Login />} />
 
             </Routes>
             <Footer />
