@@ -6,474 +6,258 @@ export default function ViewCandidate() {
     return (
         <section
             className="text-black min-h-screen flex flex-col antialiased relative"
-            style={{ background: 'linear-gradient(to bottom, #0865FF 30%, #5b9bff 55%, #ffffff 70%)' }}
+            style={{ background: 'linear-gradient(to bottom, #0865FF 40%, #5b9bff 90%, #ffffff 100%)' }}
         >
             {/* ── Shape Image + Grid overlay ── */}
             <div
                 className="flex-grow w-full relative z-10"
                 style={{
-                    backgroundImage: `url(${backgroundImage}), linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)`,
-                    backgroundSize: 'cover, 80px 80px, 80px 80px',
-                    backgroundPosition: 'center, 0 0, 0 0',
-                    backgroundRepeat: 'no-repeat, repeat, repeat',
+                    backgroundImage: `url(${backgroundImage})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
                 }}
             >
+                {/* ── Profile Section ── */}
+                <div className="max-w-3xl sm:max-w-none mx-auto px-5 sm:px-10 md:px-14 lg:px-24 xl:px-48 pt-10 sm:pt-14 pb-10 sm:pb-14 sm:pr-0">
 
-                {/* ════════════════════════════════════════
-                    MOBILE LAYOUT  (hidden on md+)
-                    ════════════════════════════════════════ */}
-                <div className="md:hidden">
+                    {/* ── MOBILE: vertical card ── */}
+                    <div className="flex flex-col items-center sm:hidden">
 
-                    {/* Profile section */}
-                    <div className="max-w-3xl mx-auto px-5 pt-10 pb-10">
-                        <div className="flex flex-row items-start gap-5 w-full">
+                        {/* Position — top */}
+                        <p className="
+                            text-[30px] font-black tracking-[0em]
+                            uppercase text-white text-center
+                            m-0 mb-5
+                        ">
+                            {candidate.position}
+                        </p>
 
-                            {/* Photo card */}
-                            <div className="flex-shrink-0">
-                                <div
-                                    className="bg-white overflow-hidden"
-                                    style={{
-                                        borderRadius: '18px',
-                                        width: '148px',
-                                        height: '188px',
-                                        padding: '6px',
-                                        boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
-                                    }}
-                                >
-                                    <img
-                                        src={candidate.imgSrc}
-                                        alt={`${candidate.firstName} ${candidate.lastName}`}
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            objectFit: 'cover',
-                                            objectPosition: 'top',
-                                            borderRadius: '12px',
-                                            display: 'block',
-                                        }}
-                                    />
-                                </div>
-                            </div>
+                        {/* Photo card — centered */}
+                        <div className="
+                            bg-white overflow-hidden
+                            rounded-[22px] w-[250px] h-[350px]
+                            p-[7px]
+                            shadow-[0_8px_32px_rgba(0,0,0,0.22)]
+                            mb-5
+                        ">
+                            <img
+                                src={candidate.imgSrc}
+                                alt={`${candidate.firstName} ${candidate.lastName}`}
+                                className="w-full h-full object-cover object-top rounded-[16px] block"
+                            />
+                        </div>
 
-                            {/* Candidate details */}
-                            <div className="flex flex-col text-white flex-1 min-w-0" style={{ gap: '2px', paddingTop: '4px' }}>
-                                <h1 style={{ fontSize: '36px', fontWeight: '900', lineHeight: '1.0', letterSpacing: '-0.5px', textTransform: 'uppercase', color: '#ffffff', margin: '0' }}>
-                                    {candidate.firstName}
-                                </h1>
-                                <h1 style={{ fontSize: '36px', fontWeight: '900', lineHeight: '1.0', letterSpacing: '-0.5px', textTransform: 'uppercase', color: '#ffffff', margin: '0 0 6px 0' }}>
-                                    {candidate.lastName}
-                                </h1>
-                                <p style={{ fontSize: '15px', fontWeight: '600', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.92)', margin: '0 0 8px 0' }}>
-                                    {candidate.position}
-                                </p>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
-                                    <p style={{ fontSize: '9.5px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', color: '#ffffff', margin: 0, lineHeight: '1.35' }}>{candidate.department}</p>
-                                    <p style={{ fontSize: '9.5px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', color: '#ffffff', margin: 0 }}>{candidate.semBatch}</p>
-                                    <p style={{ fontSize: '9.5px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', color: '#ffffff', margin: 0 }}>
-                                        <span style={{ fontWeight: '900' }}>AGE : </span>{candidate.age}
-                                    </p>
-                                    <p style={{ fontSize: '9.5px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', color: '#ffffff', margin: '0 0 6px 0', lineHeight: '1.35' }}>{candidate.party}</p>
-                                    <p style={{ fontSize: '9.5px', fontWeight: '700', color: 'rgba(255,255,255,0.88)', margin: 0, letterSpacing: '0.01em' }}>{candidate.email}</p>
-                                    <p style={{ fontSize: '9.5px', fontWeight: '700', color: 'rgba(255,255,255,0.88)', margin: 0, letterSpacing: '0.01em' }}>{candidate.phone}</p>
-                                </div>
-                            </div>
+                        {/* Full name — below photo */}
+                        <h1 className="
+                            text-[28px] font-black leading-[1.0]
+                            tracking-[-0.5px] uppercase text-white
+                            text-center m-0 mb-[6px]
+                        ">
+                            {candidate.firstName} {candidate.lastName}
+                        </h1>
+
+                        {/* Details — centered below name */}
+                        <div className="flex flex-col items-center gap-[3px] mt-[6px]">
+                            <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-white m-0 text-center leading-[1.4]">
+                                {candidate.department}
+                            </p>
+                            <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-white m-0 text-center">
+                                {candidate.semBatch}
+                            </p>
+                            <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-white m-0 text-center">
+                                <span className="font-black">AGE : </span>{candidate.age}
+                            </p>
+                            <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-white m-0 mb-[4px] text-center leading-[1.4]">
+                                {candidate.party}
+                            </p>
+                            <p className="text-[12px] font-bold text-white/[0.88] m-0 tracking-[0.01em] text-center">
+                                {candidate.email}
+                            </p>
+                            <p className="text-[12px] font-bold text-white/[0.88] m-0 tracking-[0.01em] text-center">
+                                {candidate.phone}
+                            </p>
                         </div>
                     </div>
 
-                    {/* Tagline + About */}
-                    <div className="max-w-3xl mx-auto px-5 pb-8" style={{ paddingTop: '4px' }}>
-                        <h2 style={{ fontSize: '25px', fontWeight: '700', fontStyle: 'italic', color: 'rgba(255,255,255,0.88)', margin: '0 0 10px 0', lineHeight: '1.3' }}>
-                            {candidate.tagline}
-                        </h2>
-                        <p style={{ fontSize: '14px', fontWeight: '400', color: 'rgba(255,255,255,0.88)', lineHeight: '1.65', margin: 0, maxWidth: '560px' }}>
-                            {candidate.about}
-                        </p>
-                    </div>
+                    {/* ── DESKTOP: horizontal row ── */}
+                    <div className="hidden sm:flex flex-row items-start gap-10 md:gap-10 lg:gap-16 w-full">
 
-                    {/* Clubs */}
-                    <div className="max-w-3xl mx-auto px-5 pb-20" style={{ paddingTop: '28px' }}>
-                        <h2 style={{ fontSize: '28px', fontWeight: '900', textTransform: 'uppercase', color: 'rgba(255,255,255,0.88)', margin: '0 0 18px 0', letterSpacing: '0.01em', lineHeight: '1.1' }}>
-                            CLUBS AND RESPONSIBILITIES
-                        </h2>
-                        <div style={{ border: '1px solid #e0e0e0', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 2px 10px rgba(0,0,0,0.06)', background: '#ffffff' }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', background: '#f8f8f8', borderBottom: '1px solid #e0e0e0' }}>
-                                <div style={{ padding: '14px 24px', textAlign: 'center', fontSize: '11px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#000000', borderRight: '1px solid #e0e0e0' }}>CLUB NAME</div>
-                                <div style={{ padding: '14px 24px', textAlign: 'center', fontSize: '11px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#000000' }}>ROLE</div>
+                        {/* Photo card */}
+                        <div className="flex-shrink-0">
+                            <div className="
+                                bg-white overflow-hidden
+                                rounded-[22px] sm:rounded-[28px]
+                                w-[200px] sm:w-[260px] md:w-[350px]
+                                h-[260px] sm:h-[340px] md:h-[500px]
+                                p-[8px] sm:p-[10px]
+                                shadow-[0_12px_48px_rgba(0,0,0,0.22)]
+                            ">
+                                <img
+                                    src={candidate.imgSrc}
+                                    alt={`${candidate.firstName} ${candidate.lastName}`}
+                                    className="w-full h-full object-cover object-top rounded-[20px] block"
+                                />
                             </div>
-                            {candidate.clubs.map((club, idx) => (
-                                <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderBottom: idx < candidate.clubs.length - 1 ? '1px solid #f0f0f0' : 'none', background: '#ffffff' }}>
-                                    <div style={{ padding: '16px 20px', textAlign: 'center', borderRight: '1px solid #f0f0f0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2px' }}>
-                                        <p style={{ fontSize: '11px', fontWeight: '700', color: '#000000', margin: 0, lineHeight: '1.3' }}>{club.name}</p>
-                                        <p style={{ fontSize: '9.5px', fontWeight: '400', color: '#555555', margin: 0, lineHeight: '1.4', maxWidth: '180px' }}>{club.fullName}</p>
-                                    </div>
-                                    <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <span style={{ fontSize: '11px', fontWeight: '600', color: '#000000', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{club.role}</span>
-                                    </div>
-                                </div>
-                            ))}
+                        </div>
+
+                        {/* Candidate details */}
+                        <div className="flex flex-col text-white flex-1 gap-[4px] pt-[8px]">
+
+                            {/* First name */}
+                            <h1 className="text-[clamp(32px,5vw,96px)] font-black leading-[0.95] tracking-[-1px] uppercase text-white m-0">
+                                {candidate.firstName}
+                            </h1>
+
+                            {/* Last name */}
+                            <h1 className="text-[clamp(32px,5vw,96px)] font-black leading-[0.95] tracking-[-1px] uppercase text-white m-0 mb-[12px]">
+                                {candidate.lastName}
+                            </h1>
+
+                            {/* Position */}
+                            <p className="text-[16px] sm:text-[22px] md:text-[30px] font-black tracking-[0.14em] md:tracking-[0.18em] uppercase text-white m-0 mb-[16px]">
+                                {candidate.position}
+                            </p>
+
+                            {/* Details */}
+                            <div className="flex flex-col gap-[4px] md:gap-[6px]">
+                                <p className="text-[11px] sm:text-[14px] md:text-[18px] font-bold uppercase tracking-[0.07em] text-white m-0 leading-[1.4]">
+                                    {candidate.department}
+                                </p>
+                                <p className="text-[11px] sm:text-[14px] md:text-[18px] font-bold uppercase tracking-[0.07em] text-white m-0">
+                                    {candidate.semBatch}
+                                </p>
+                                <p className="text-[11px] sm:text-[14px] md:text-[18px] font-bold uppercase tracking-[0.07em] text-white m-0">
+                                    <span className="font-black">AGE : </span>{candidate.age}
+                                </p>
+                                <p className="text-[11px] sm:text-[14px] md:text-[18px] font-bold uppercase tracking-[0.07em] text-white m-0 mb-[8px] md:mb-[10px] leading-[1.4]">
+                                    {candidate.party}
+                                </p>
+                                <p className="text-[11px] sm:text-[14px] md:text-[18px] font-bold text-white/[0.88] m-0 tracking-[0.01em]">
+                                    {candidate.email}
+                                </p>
+                                <p className="text-[11px] sm:text-[14px] md:text-[18px] font-bold text-white/[0.88] m-0 tracking-[0.01em]">
+                                    {candidate.phone}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* ════════════════════════════════════════
-                    DESKTOP LAYOUT  (md and above)
-                    ════════════════════════════════════════ */}
-                <div className="hidden md:block">
-
-                    {/* ── Profile Section ── */}
-                    <div className="w-full px-14 lg:px-25 xl:px-50 pt-14 pb-14 pr-0">
-                        <div className="flex flex-row items-start gap-10 lg:gap-16 w-full">
-
-                            {/* Photo card */}
-                            <div className="flex-shrink-0">
-                                <div
-                                    style={{
-                                        background: '#ffffff',
-                                        borderRadius: '28px',
-                                        width: '260px',
-                                        height: '330px',
-                                        padding: '10px',
-                                        boxShadow: '0 12px 48px rgba(0,0,0,0.22)',
-                                    }}
-                                >
-                                    <img
-                                        src={candidate.imgSrc}
-                                        alt={`${candidate.firstName} ${candidate.lastName}`}
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            objectFit: 'cover',
-                                            objectPosition: 'top',
-                                            borderRadius: '20px',
-                                            display: 'block',
-                                        }}
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Candidate details */}
-                            <div
-                                className="flex flex-col text-white flex-1"
-                                style={{ gap: '4px', paddingTop: '8px' }}
-                            >
-                                {/* First name */}
-                                <h1
-                                    style={{
-                                        fontSize: 'clamp(60px, 7vw, 96px)',
-                                        fontWeight: '900',
-                                        lineHeight: '0.95',
-                                        letterSpacing: '-1px',
-                                        textTransform: 'uppercase',
-                                        color: '#ffffff',
-                                        margin: '0',
-                                    }}
-                                >
-                                    {candidate.firstName}
-                                </h1>
-
-                                {/* Last name */}
-                                <h1
-                                    style={{
-                                        fontSize: 'clamp(60px, 7vw, 96px)',
-                                        fontWeight: '900',
-                                        lineHeight: '0.95',
-                                        letterSpacing: '-1px',
-                                        textTransform: 'uppercase',
-                                        color: '#ffffff',
-                                        margin: '0 0 12px 0',
-                                    }}
-                                >
-                                    {candidate.lastName}
-                                </h1>
-
-                                {/* Position */}
-                                <p
-                                    style={{
-                                        fontSize: '30px',
-                                        fontWeight: '900',
-                                        letterSpacing: '0.18em',
-                                        textTransform: 'uppercase',
-                                        color: '#ffffff',
-                                        margin: '0 0 16px 0',
-                                    }}
-                                >
-                                    {candidate.position}
-                                </p>
-
-                                {/* Details */}
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-
-                                    {/* Department */}
-                                    <p
-                                        style={{
-                                            fontSize: '18px',
-                                            fontWeight: '700',
-                                            textTransform: 'uppercase',
-                                            letterSpacing: '0.07em',
-                                            color: '#ffffff',
-                                            margin: 0,
-                                            lineHeight: '1.4',
-                                        }}
-                                    >
-                                        {candidate.department}
-                                    </p>
-
-                                    {/* Sem / Batch */}
-                                    <p
-                                        style={{
-                                            fontSize: '18px',
-                                            fontWeight: '700',
-                                            textTransform: 'uppercase',
-                                            letterSpacing: '0.07em',
-                                            color: '#ffffff',
-                                            margin: 0,
-                                        }}
-                                    >
-                                        {candidate.semBatch}
-                                    </p>
-
-                                    {/* Age */}
-                                    <p
-                                        style={{
-                                            fontSize: '18px',
-                                            fontWeight: '700',
-                                            textTransform: 'uppercase',
-                                            letterSpacing: '0.07em',
-                                            color: '#ffffff',
-                                            margin: 0,
-                                        }}
-                                    >
-                                        <span style={{ fontWeight: '900' }}>AGE : </span>
-                                        {candidate.age}
-                                    </p>
-
-                                    {/* Party */}
-                                    <p
-                                        style={{
-                                            fontSize: '18px',
-                                            fontWeight: '700',
-                                            textTransform: 'uppercase',
-                                            letterSpacing: '0.07em',
-                                            color: '#ffffff',
-                                            margin: '0 0 10px 0',
-                                            lineHeight: '1.4',
-                                        }}
-                                    >
-                                        {candidate.party}
-                                    </p>
-
-                                    {/* Email */}
-                                    <p
-                                        style={{
-                                            fontSize: '18px',
-                                            fontWeight: '700',
-                                            color: 'rgba(255,255,255,0.88)',
-                                            margin: 0,
-                                            letterSpacing: '0.01em',
-                                        }}
-                                    >
-                                        {candidate.email}
-                                    </p>
-
-                                    {/* Phone */}
-                                    <p
-                                        style={{
-                                            fontSize: '18px',
-                                            fontWeight: '700',
-                                            color: 'rgba(255,255,255,0.88)',
-                                            margin: 0,
-                                            letterSpacing: '0.01em',
-                                        }}
-                                    >
-                                        {candidate.phone}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    {/* ── Tagline + About ── */}
-                    <div
-                        className="w-full px-14 lg:px-25 xl:px-40 pb-12"
-                        style={{ paddingTop: '8px' }}
-                    >
-                        <h2
-                            style={{
-                                fontSize: '32px',
-                                fontWeight: '700',
-                                fontStyle: 'italic',
-                                color: 'rgba(255,255,255,0.88)',
-                                margin: '0 0 14px 0',
-                                lineHeight: '1.3',
-                            }}
-                        >
-                            {candidate.tagline}
-                        </h2>
-
-                        <p
-                            style={{
-                                fontSize: '18px',
-                                fontWeight: '400',
-                                color: 'rgba(255,255,255,0.88)',
-                                lineHeight: '1.7',
-                                margin: 0,
-                                maxWidth: 'none',
-                                width: '100%',
-                            }}
-                        >
-                            {candidate.about}
-                        </p>
-                    </div>
-
-
-                    {/* ── Clubs and Responsibilities ── */}
-                    <div
-                        className="w-full px-14 lg:px-24 xl:px-32 pb-24"
-                        style={{ paddingTop: '32px' }}
-                    >
-                        {/* Section heading */}
-                        <h2
-                            style={{
-                                fontSize: 'clamp(32px, 4vw, 52px)',
-                                fontWeight: '900',
-                                textTransform: 'uppercase',
-                                color: 'rgba(255,255,255,0.88)',
-                                margin: '0 0 24px 0',
-                                letterSpacing: '0.01em',
-                                lineHeight: '1.1',
-                            }}
-                        >
-                            CLUBS AND RESPONSIBILITIES
-                        </h2>
-
-                        {/* Table */}
-                        <div
-                            style={{
-                                border: '1px solid #d8d8d8',
-                                borderRadius: '20px',
-                                overflow: 'hidden',
-                                boxShadow: '0 4px 20px rgba(0,0,0,0.07)',
-                                background: '#ffffff',
-                            }}
-                        >
-                            {/* Header */}
-                            <div
-                                style={{
-                                    display: 'grid',
-                                    gridTemplateColumns: '1fr 1fr',
-                                    background: '#f5f5f5',
-                                    borderBottom: '1px solid #d8d8d8',
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        padding: '20px 40px',
-                                        textAlign: 'center',
-                                        fontSize: '14px',
-                                        fontWeight: '800',
-                                        textTransform: 'uppercase',
-                                        letterSpacing: '0.14em',
-                                        color: '#000000',
-                                        borderRight: '1px solid #d8d8d8',
-                                    }}
-                                >
-                                    CLUB NAME
-                                </div>
-                                <div
-                                    style={{
-                                        padding: '20px 40px',
-                                        textAlign: 'center',
-                                        fontSize: '14px',
-                                        fontWeight: '800',
-                                        textTransform: 'uppercase',
-                                        letterSpacing: '0.14em',
-                                        color: '#000000',
-                                    }}
-                                >
-                                    ROLE
-                                </div>
-                            </div>
-
-                            {/* Rows */}
-                            {candidate.clubs.map((club, idx) => (
-                                <div
-                                    key={idx}
-                                    style={{
-                                        display: 'grid',
-                                        gridTemplateColumns: '1fr 1fr',
-                                        borderBottom: idx < candidate.clubs.length - 1 ? '1px solid #eeeeee' : 'none',
-                                        background: '#ffffff',
-                                        transition: 'background 0.15s',
-                                    }}
-                                    onMouseEnter={e => e.currentTarget.style.background = '#fafafa'}
-                                    onMouseLeave={e => e.currentTarget.style.background = '#ffffff'}
-                                >
-                                    {/* Club name cell */}
-                                    <div
-                                        style={{
-                                            padding: '22px 40px',
-                                            textAlign: 'center',
-                                            borderRight: '1px solid #eeeeee',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            gap: '4px',
-                                        }}
-                                    >
-                                        <p
-                                            style={{
-                                                fontSize: '14px',
-                                                fontWeight: '700',
-                                                color: '#000000',
-                                                margin: 0,
-                                                lineHeight: '1.3',
-                                            }}
-                                        >
-                                            {club.name}
-                                        </p>
-                                        <p
-                                            style={{
-                                                fontSize: '12px',
-                                                fontWeight: '400',
-                                                color: '#555555',
-                                                margin: 0,
-                                                lineHeight: '1.4',
-                                            }}
-                                        >
-                                            {club.fullName}
-                                        </p>
-                                    </div>
-
-                                    {/* Role cell */}
-                                    <div
-                                        style={{
-                                            padding: '22px 40px',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                        }}
-                                    >
-                                        <span
-                                            style={{
-                                                fontSize: '14px',
-                                                fontWeight: '700',
-                                                color: '#000000',
-                                                textTransform: 'uppercase',
-                                                letterSpacing: '0.12em',
-                                            }}
-                                        >
-                                            {club.role}
-                                        </span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
+                {/* ── Tagline + About ── */}
+                <div className="max-w-3xl sm:max-w-none mx-auto px-5 sm:px-10 md:px-8 lg:px-12 xl:px-20 pt-[4px] sm:pt-[8px] pb-8 sm:pb-12">
+                    <h2 className="
+                        text-[22px] sm:text-[26px] md:text-[32px]
+                        font-bold italic
+                        text-white/[0.88] m-0
+                        mb-[10px] sm:mb-[14px]
+                        leading-[1.3]
+                        text-center sm:text-left
+                    ">
+                        {candidate.tagline}
+                    </h2>
+                    <p className="
+                        text-[13px] sm:text-[15px] md:text-[18px]
+                        font-normal text-white/[0.88]
+                        leading-[1.65] sm:leading-[1.7]
+                        m-0
+                        text-center sm:text-left
+                        sm:w-full
+                    ">
+                        {candidate.about}
+                    </p>
                 </div>
-                {/* end desktop layout */}
+
+                {/* ── Clubs and Responsibilities ── */}
+                <div className="max-w-3xl sm:max-w-none mx-auto px-5 sm:px-10 md:px-14 lg:px-24 xl:px-32 pt-[28px] sm:pt-[32px] pb-20 sm:pb-24">
+
+                    {/* Section heading */}
+                    <h2 className="
+                        text-[22px] sm:text-[clamp(28px,4vw,52px)]
+                        font-black uppercase
+                        text-white/[0.88] m-0
+                        mb-[18px] sm:mb-[24px]
+                        tracking-[0.01em] leading-[1.1]
+                        text-center sm:text-left
+                    ">
+                        CLUBS AND RESPONSIBILITIES
+                    </h2>
+
+                    {/* Table */}
+                    <div className="
+                        border border-[#e0e0e0] sm:border-[#d8d8d8]
+                        rounded-[16px] sm:rounded-[20px]
+                        overflow-hidden
+                        shadow-[0_2px_10px_rgba(0,0,0,0.06)] sm:shadow-[0_4px_20px_rgba(0,0,0,0.07)]
+                        bg-white
+                    ">
+                        {/* Header */}
+                        <div className="grid grid-cols-2 bg-[#f8f8f8] sm:bg-[#f5f5f5] border-b border-[#e0e0e0] sm:border-[#d8d8d8]">
+                            <div className="
+                                py-[14px] sm:py-[20px]
+                                px-[24px] sm:px-[40px]
+                                text-center
+                                text-[11px] sm:text-[14px]
+                                font-[800] uppercase
+                                tracking-[0.12em] sm:tracking-[0.14em]
+                                text-black
+                                border-r border-[#e0e0e0] sm:border-[#d8d8d8]
+                            ">
+                                CLUB NAME
+                            </div>
+                            <div className="
+                                py-[14px] sm:py-[20px]
+                                px-[24px] sm:px-[40px]
+                                text-center
+                                text-[11px] sm:text-[14px]
+                                font-[800] uppercase
+                                tracking-[0.12em] sm:tracking-[0.14em]
+                                text-black
+                            ">
+                                ROLE
+                            </div>
+                        </div>
+
+                        {/* Rows */}
+                        {candidate.clubs.map((club, idx) => (
+                            <div
+                                key={idx}
+                                className={`grid grid-cols-2 bg-white transition-colors duration-[150ms]${idx < candidate.clubs.length - 1 ? ' border-b border-[#f0f0f0] sm:border-[#eeeeee]' : ''}`}
+                                onMouseEnter={e => e.currentTarget.style.background = '#fafafa'}
+                                onMouseLeave={e => e.currentTarget.style.background = '#ffffff'}
+                            >
+                                {/* Club name cell */}
+                                <div className="
+                                    py-[16px] sm:py-[22px]
+                                    px-[20px] sm:px-[40px]
+                                    text-center
+                                    border-r border-[#f0f0f0] sm:border-[#eeeeee]
+                                    flex flex-col items-center justify-center
+                                    gap-[2px] sm:gap-[4px]
+                                ">
+                                    <p className="text-[11px] sm:text-[14px] font-bold text-black m-0 leading-[1.3]">
+                                        {club.name}
+                                    </p>
+                                    <p className="text-[9.5px] sm:text-[12px] font-normal text-[#555555] m-0 leading-[1.4] max-w-[180px]">
+                                        {club.fullName}
+                                    </p>
+                                </div>
+
+                                {/* Role cell */}
+                                <div className="py-[16px] sm:py-[22px] px-[20px] sm:px-[40px] flex items-center justify-center">
+                                    <span className="
+                                        text-[11px] sm:text-[14px]
+                                        font-semibold sm:font-bold
+                                        text-black uppercase
+                                        tracking-[0.1em] sm:tracking-[0.12em]
+                                    ">
+                                        {club.role}
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
             </div>
         </section>

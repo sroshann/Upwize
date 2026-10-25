@@ -11,10 +11,10 @@ export default function BeforeElectionUser() {
             <div
                 style={{
                     ...styles.bgGridPattern,
-                    backgroundImage: `url(${backgroundImage}), linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)`,
-                    backgroundSize: 'cover, 80px 80px, 80px 80px',
-                    backgroundPosition: 'center, 0 0, 0 0',
-                    backgroundRepeat: 'no-repeat, repeat, repeat',
+                    backgroundImage: `url(${backgroundImage})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
                 }}
                 className="flex-grow w-full pb-28 relative z-10"
             >
