@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { styles } from './CandidateData'
 
 function CandidateCard({ imgSrc, imgAlt, name, nameLine2, department, year, party, partyShort, partyColor, tagline }) {
@@ -52,12 +53,12 @@ function CandidateCard({ imgSrc, imgAlt, name, nameLine2, department, year, part
             </p>
 
             {/* CTA */}
-            <a
-                href="#"
+            <Link
+                to="/user/before-election/view-candidate"
                 className="w-full py-1 sm:py-2 md:py-2.5 px-1 sm:px-3 md:px-4 bg-gradient-to-b from-[#2a2a2a] to-[#0a0a0a] hover:from-[#0865FF] hover:to-[#054bbd] text-white text-[8px] sm:text-xs font-semibold rounded-full text-center transition-colors duration-200 mt-auto shadow-sm tracking-tight sm:tracking-normal whitespace-nowrap"
             >
                 View Candidate
-            </a>
+            </Link>
         </div>
     )
 }

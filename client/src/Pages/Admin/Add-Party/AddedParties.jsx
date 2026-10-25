@@ -7,7 +7,7 @@ function AddedParties({ associations }) {
     const { mutate } = useRemoveAssociation()
     const handleRemove = (id) => {
 
-        toast.loading('Removing association',{ id:'remove-association', style: toastStyle })
+        toast.loading('Removing association', { id: 'remove-association', style: toastStyle })
         mutate(id)
 
     }
