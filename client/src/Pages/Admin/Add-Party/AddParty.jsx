@@ -1,60 +1,27 @@
-import React, { useState, useRef } from 'react'
 import backgroundImage from '../../../assets/Common/Shape Image.png'
 import { bulletPoints } from './AddPartyData'
 import FormCard from './FormCard'
 import AddedParties from './AddedParties'
+import { useQuery } from '@tanstack/react-query'
+import { queryClient, queryKeys } from '../../../lib/tanstack'
+import { useEffect } from 'react'
 
 function AddParty() {
-    const [logoPreview, setLogoPreview] = useState(null)
-    const [partyColor, setPartyColor] = useState('#0865FF')
-    const [fullName, setFullName] = useState('')
-    const [shortName, setShortName] = useState('')
-    const [description, setDescription] = useState('')
-    const [parties, setParties] = useState([])
-    const fileInputRef = useRef(null)
 
-    const handleLogoUpload = (e) => {
-        const file = e.target.files[0]
-        if (file) {
-            const reader = new FileReader()
-            reader.onloadend = () => setLogoPreview(reader.result)
-            reader.readAsDataURL(file)
-        }
-    }
+    const { data: recentlyAdded = [] } = useQuery({
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        if (!fullName.trim() || !logoPreview || !shortName.trim() || !description.trim()) return
-        const newParty = {
-            id: Date.now(),
-            logo: logoPreview,
-            fullName,
-            shortName,
-            color: partyColor,
-            description,
-        }
-        setParties(prev => [newParty, ...prev])
-        // Reset form
-        setFullName('')
-        setShortName('')
-        setDescription('')
-        setPartyColor('#0865FF')
-        setLogoPreview(null)
-        if (fileInputRef.current) fileInputRef.current.value = ''
-    }
+        queryKey: queryKeys.rcntAssociation(),
+        queryFn: () => {},
+        enabled: false,
 
-    const formProps = {
-        logoPreview,
-        setLogoPreview,
-        partyColor,
-        setPartyColor,
-        fullName, setFullName,
-        shortName, setShortName,
-        description, setDescription,
-        fileInputRef,
-        handleLogoUpload,
-        handleSubmit,
-    }
+    })
+    
+    useEffect(() => {
+
+        // Resetting recently added cache into empty
+        return () => queryClient.removeQueries({ queryKey: queryKeys.rcntAssociation() })
+
+    }, [ queryClient ])
 
     return (
         <section className="bg-gradient-to-b from-[#0865FF] to-white min-h-screen flex flex-col antialiased">
@@ -77,7 +44,7 @@ function AddParty() {
                             </p>
                         ))}
                     </div>
-                    <FormCard {...formProps} />
+                    <FormCard />
                 </div>
 
                 {/* TABLET layout (md only) */}
@@ -93,7 +60,7 @@ function AddParty() {
                         ))}
                     </div>
                     <div className="flex-1 w-[85%] mx-auto">
-                        <FormCard {...formProps} />
+                        <FormCard />
                     </div>
                 </div>
 
@@ -114,11 +81,11 @@ function AddParty() {
                     </div>
                     {/* Right form column */}
                     <div className="flex-1 max-w-[500px] xl:max-w-[560px]">
-                        <FormCard {...formProps} />
+                        <FormCard />
                     </div>
                 </div>
 
-                {parties.length > 0 && <AddedParties data={parties} setFunction={setParties} />}
+                { recentlyAdded && recentlyAdded.length > 0 && <AddedParties associations={ recentlyAdded } />}
             </main>
 
         </section>
