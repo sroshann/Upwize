@@ -8,6 +8,7 @@ import DuringElection from "./Pages/User/During-Election/DuringElection"
 import AddParty from "./Pages/Admin/Add-Party/AddParty"
 import AddPositions from "./Pages/Admin/Add-Positions/AddPositions"
 import UserBeforeElection from "./Pages/User/Before-Election/Before-Election"
+import ViewCandidate from "./Pages/User/Before-Election/ViewCandiate/View-Candidate"
 import Footer from "./components/Footer/Footer"
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 
                 {/* User */}
                 <Route path="/user/before-election" element={<UserBeforeElection />} />
+                <Route path="/user/before-election/view-candidate" element={<ViewCandidate />} />
                 <Route path="/user/during-election" element={<DuringElection />} />
 
             </Routes>

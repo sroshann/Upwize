@@ -2,7 +2,7 @@ import { useFormik } from "formik"
 import toast from 'react-hot-toast'
 import { toastStyle } from "../../lib/toast.lib"
 import { validateAddAssociation } from "../../utils/validate.utils"
-import { useAddAssociation } from "../../hooks/Admin/before-election.hook"
+import { useAddAssociation } from "../../hooks/admin/before-election.hook"
 
 // Create association formik
 export const addPartyFormik = ({ setLogoPreview, fileInputRef }) => {
