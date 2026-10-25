@@ -145,7 +145,7 @@ export default function ViewCandidate() {
                 </div>
 
                 {/* ── Tagline + About ── */}
-                <div className="max-w-3xl sm:max-w-none mx-auto px-5 sm:px-10 md:px-8 lg:px-12 xl:px-20 pt-[4px] sm:pt-[8px] pb-8 sm:pb-12">
+                <div className="max-w-3xl md:max-w-none mx-auto px-5 md:px-10 lg:px-18 xl:px-32 pt-[4px] md:pt-[8px] pb-8 md:pb-12">
                     <h2 className="
                         text-[22px] sm:text-[26px] md:text-[32px]
                         font-bold italic
