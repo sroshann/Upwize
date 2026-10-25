@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom"
 import { useEffect } from "react"
+import { Toaster } from "react-hot-toast"
 
 import Navbar from "./components/Navbar/Navbar"
 import BeforeElection from "./Pages/Admin/Before-Election/BeforeElection"
@@ -36,6 +37,7 @@ function App() {
 
             </Routes>
             <Footer />
+            <Toaster />
 
         </>
 
