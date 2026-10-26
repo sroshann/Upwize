@@ -20,3 +20,11 @@ export const removeAssociation = async (id) => {
     return message
 
 }
+
+// Add candidate
+export const addCandidate = async (data) => {
+
+    const response = await axiosInstance.post('/admin/before-election/add-candidate', data)
+    return response?.data
+
+}

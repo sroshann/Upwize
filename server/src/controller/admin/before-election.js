@@ -1,4 +1,5 @@
 import { Association } from "../../models/association.model.js"
+import { Candidate } from "../../models/candidate.model.js"
 import { validateImage } from "../../util/validateFile.util.js"
 import { uploadToCloudinary } from '../../lib/cloudinary.lib.js'
 import { redisClient } from "../../lib/redis.lib.js"
@@ -79,5 +80,64 @@ export const removeAssociation = async (request, response) => {
         return response.status(200).json({ message: 'Association removed successfully' })
 
     } catch (error) { return response.status(500).json({ message: 'Error on removing association' }) }
+
+}
+
+// Add candidate
+export const addCandidate = async (request, response) => {
+
+    try {
+
+        const {
+            firstName, lastName,
+            email, age, department, semester, batch,
+            position, association, contactNumber,
+            club, role, message
+        } = request?.body
+        let { profileImg } = request?.body
+
+        // Validate required fields
+        if (!firstName || !lastName || !email || !age || !department || !semester || !batch || !position || !association || !contactNumber)
+            return response.status(400).json({ message: 'Please fill in all required fields' })
+
+        // Validate and upload profile image
+        if (profileImg) {
+
+            const imageResult = validateImage(profileImg)
+            if (imageResult?.error) return response.status(400).json({ message: imageResult?.message })
+
+            const cloudinary = await uploadToCloudinary(imageResult?.file)
+            if (cloudinary?.error) return response.status(400).json({ message: cloudinary?.message })
+
+            profileImg = cloudinary?.url
+
+        } else return response.status(400).json({ message: 'Profile image is required' })
+
+        // Creating new candidate in DB
+        const newCandidate = new Candidate({
+
+            fullName: { firstName, lastName }, profileImg, email, age, department,
+            semester, batch, position, association, contactNumber,
+            club, role, message
+
+        })
+        await newCandidate.save()
+
+        if (newCandidate) {
+
+            const { __v, ...rest } = newCandidate.toObject()
+            // Adding new candidate to Redis cache
+            await redisClient.hSet('candidates', rest?._id.toString(), JSON.stringify(rest))
+            await redisClient.expire('candidates', 1800)
+            return response.status(200).json({
+
+                message: `Candidate '${firstName} ${lastName}' added successfully`,
+                data: rest
+
+            })
+
+        }
+
+    } catch (error) { return response.status(500).json({ message: 'Error on adding candidate' }) }
 
 }

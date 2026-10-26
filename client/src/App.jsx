@@ -9,6 +9,7 @@ import AddParty from "./Pages/Admin/Add-Party/AddParty"
 import AddPositions from "./Pages/Admin/Add-Positions/AddPositions"
 import UserBeforeElection from "./Pages/User/Before-Election/Before-Election"
 import Footer from "./components/Footer/Footer"
+import AddCandidate from "./Pages/Admin/Add-Candidate/AddCandidate"
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/admin/before-election" element={<BeforeElection />} />
                 <Route path="/admin/add-party" element={<AddParty />} />
                 <Route path="/admin/add-position" element={<AddPositions />} />
+                <Route path="/admin/add-candidate" element={<AddCandidate />} />
 
                 {/* User */}
                 <Route path="/user/before-election" element={<UserBeforeElection />} />
