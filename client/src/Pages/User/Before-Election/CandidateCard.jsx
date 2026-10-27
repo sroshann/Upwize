@@ -2,7 +2,19 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { styles } from './CandidateData'
 
-function CandidateCard({ imgSrc, imgAlt, name, nameLine2, department, year, party, partyShort, partyColor, tagline }) {
+function CandidateCard({
+    imgSrc, imgAlt, name, nameLine2,
+    firstName, lastName, position,
+    department, year, semBatch, age,
+    party, partyShort, partyColor,
+    email, phone, tagline, about, clubs,
+}) {
+    const candidateData = {
+        imgSrc, firstName, lastName, position,
+        department, semBatch, age,
+        party, email, phone, tagline, about, clubs,
+    }
+
     return (
         <div
             className="bg-white p-2.5 sm:p-3 md:p-5 flex flex-col items-center text-center text-slate-900 shadow-xl border border-slate-100 transition-transform duration-300 hover:-translate-y-1.5 h-full rounded-[15px] sm:rounded-[30px] md:rounded-[32px]"
@@ -11,9 +23,7 @@ function CandidateCard({ imgSrc, imgAlt, name, nameLine2, department, year, part
             }}
         >
             {/* Photo */}
-            <div
-                className="w-full aspect-[4/3] overflow-hidden bg-slate-100 mb-2 sm:mb-3 md:mb-5 relative rounded-[12px] sm:rounded-[20px] md:rounded-[22px]"
-            >
+            <div className="w-full aspect-[4/3] overflow-hidden bg-slate-100 mb-2 sm:mb-3 md:mb-5 relative rounded-[12px] sm:rounded-[20px] md:rounded-[22px]">
                 <img
                     src={imgSrc}
                     alt={imgAlt}
@@ -55,6 +65,7 @@ function CandidateCard({ imgSrc, imgAlt, name, nameLine2, department, year, part
             {/* CTA */}
             <Link
                 to="/user/before-election/view-candidate"
+                state={{ candidate: candidateData }}
                 className="w-full py-1 sm:py-2 md:py-2.5 px-1 sm:px-3 md:px-4 bg-gradient-to-b from-[#2a2a2a] to-[#0a0a0a] hover:from-[#0865FF] hover:to-[#054bbd] text-white text-[8px] sm:text-xs font-semibold rounded-full text-center transition-colors duration-200 mt-auto shadow-sm tracking-tight sm:tracking-normal whitespace-nowrap"
             >
                 View Candidate

@@ -1,9 +1,10 @@
+import sfiPhoto from '../../../assets/Common/WhatsApp Image 2026-10-27 at 1.30.05 PM.jpeg'
+
 // ─── Candidate Basic Details ─────────────────────────────────────────────────
 // Edit this file to update the candidate's information displayed on the page.
 
 const candidate = {
-    imgSrc:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuA6qtrAXmv9QMPO-hrJ77S07Y6Fl4tAxnUyLO1nPYvPNu4SSZp3nBUSF_VX3sjGC4gd7ermB3UfvmscngHI6ajrh9jFfac28LNIhVFDzKoWQrdHYYwKW__ZB05lRP3pCUBohy8WJtnKHoac_9cs62XRgm2gvAHcuFayxBbUeWerw1dIx61NxU3vXQbEQjhJ_FYkvVj4MqfZffjlFRfwVk662iFZrrrvnGJApLtfg5AZI8ynh5vQU6eV',
+    imgSrc: sfiPhoto,
     firstName: 'SWAROOP',
     lastName: 'CHANDRAN',
     position: 'CHAIRPERSON',
