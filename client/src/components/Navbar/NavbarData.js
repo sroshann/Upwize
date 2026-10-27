@@ -5,6 +5,7 @@ export const pages = [
             { label: 'Before Election', path: '/admin/before-election' },
             { label: 'Add Party', path: '/admin/add-party' },
             { label: 'Add Position', path: '/admin/add-position' },
+            { label: 'Add Guidelines', path: '/admin/add-guidelines' },
         ],
     },
     {
