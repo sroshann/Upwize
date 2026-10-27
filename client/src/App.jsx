@@ -9,11 +9,8 @@ import DuringElection from "./Pages/User/During-Election/DuringElection"
 import AddParty from "./Pages/Admin/Add-Party/AddParty"
 import AddPositions from "./Pages/Admin/Add-Positions/AddPositions"
 import UserBeforeElection from "./Pages/User/Before-Election/Before-Election"
-<<<<<<< HEAD
 import PositionElection from './Pages/User/During-Election/PositionElection'
-=======
 import ViewCandidate from "./Pages/User/ViewCandiate/View-Candidate"
->>>>>>> 73fb72add416d088dacb6f49e62810270406d19f
 import Footer from "./components/Footer/Footer"
 import AddGuidelines from "./Pages/Admin/Add-Guidelines/AddGuidelines"
 import Login from "./Pages/Login/login"
