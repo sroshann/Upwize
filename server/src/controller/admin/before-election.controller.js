@@ -122,3 +122,23 @@ export const addPositions = async (request, response) => {
     } catch (error) { return response?.status(500).json({ error: 'Error on adding position' }) }
 
 }
+
+// Get all positions
+export const getPositions = async ( request, response ) => {
+
+    try {
+
+        const redisPosition = await getRedisAllData( redisCollections.positions )
+        if( redisPosition ) return response.status( 200 ).json({ data: redisPosition })
+        else {
+    
+            const data = await Position.find().lean()
+            const formatted = data.map(({ __v, ...rest }) => rest)
+            await setRedisHashAll( redisCollections.positions, formatted, 1800 )
+            return response.status( 200 ).json({ data: formatted })
+    
+        }
+
+    } catch ( error ) { return response.status( 500 ).json({ error: 'Error on getting positions' }) }
+
+}

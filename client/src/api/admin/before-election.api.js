@@ -26,3 +26,12 @@ export const removeAssociation = async (id) => {
     return message
 
 }
+
+// Get all positions
+export const getPositions = async () => {
+
+    const response = await axiosInstance.get('/admin/before-election/get-positions')
+    const { data } = response?.data
+    return data
+
+}

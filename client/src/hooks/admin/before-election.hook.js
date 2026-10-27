@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { addAssociation, getAssociations, removeAssociation } from '../../api/admin/before-election.api'
+import { addAssociation, getAssociations, getPositions, removeAssociation } from '../../api/admin/before-election.api'
 import { toastStyle } from '../../lib/toast.lib'
 import toast from 'react-hot-toast'
 import { queryClient, queryKeys } from '../../lib/tanstack'
@@ -60,6 +60,19 @@ export const useGetAssociations = () => {
 
         queryKey: queryKeys.associations(),
         queryFn: getAssociations,
+        staleTime: 1000 * 60 * 30, // 30 min
+
+    })
+
+}
+
+// Getting all positions
+export const useGetPositions = () => {
+
+    return useQuery({
+
+        queryKey: queryKeys.positions(),
+        queryFn: getPositions,
         staleTime: 1000 * 60 * 30, // 30 min
 
     })

@@ -14,6 +14,8 @@ export const queryClient = new QueryClient({
 export const queryKeys = {
 
     associations: () => ['associations'],
-    rcntAssociation: () => ['associations', 'recent']
+    rcntAssociation: () => ['associations', 'recent'],
+    positions: () => ['positions'],
+    rcntPositions: () => ['position, recent']
 
 }
