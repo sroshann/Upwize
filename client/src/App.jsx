@@ -13,6 +13,7 @@ import ViewCandidate from "./Pages/User/Before-Election/ViewCandiate/View-Candid
 import Footer from "./components/Footer/Footer"
 import AddGuidelines from "./Pages/Admin/Add-Guidelines/AddGuidelines"
 import Login from "./Pages/Login/login"
+import AddCandidate from "./Pages/Admin/Add-Candidate/AddCandidate"
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/admin/add-party" element={<AddParty />} />
                 <Route path="/admin/add-position" element={<AddPositions />} />
                 <Route path="/admin/add-guidelines" element={<AddGuidelines />} />
+                <Route path="/admin/add-candidate" element={<AddCandidate />} />
 
                 {/* User */}
                 <Route path="/user/before-election" element={<UserBeforeElection />} />
