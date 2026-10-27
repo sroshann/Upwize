@@ -2,19 +2,13 @@ import backgroundImage from '../../../assets/Common/Shape Image.png'
 import { bulletPoints } from './AddPartyData'
 import FormCard from './FormCard'
 import AddedParties from './AddedParties'
-import { useQuery } from '@tanstack/react-query'
 import { queryClient, queryKeys } from '../../../lib/tanstack'
 import { useEffect } from 'react'
+import { useGetAssociations } from '../../../hooks/admin/before-election.hook'
 
 function AddParty() {
 
-    const { data: recentlyAdded = [] } = useQuery({
-
-        queryKey: queryKeys.rcntAssociation(),
-        queryFn: () => {},
-        enabled: false,
-
-    })
+    const { data: recentlyAdded = [] } = useGetAssociations()
     
     useEffect(() => {
 
