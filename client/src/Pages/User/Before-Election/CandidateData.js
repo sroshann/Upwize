@@ -1,7 +1,10 @@
+import ksuPhoto from '../../../assets/Common/IMG_20260502_061431 - Copy.jpg'
+import sfiPhoto from '../../../assets/Common/WhatsApp Image 2026-10-27 at 1.30.05 PM.jpeg'
+import abvpPhoto from '../../../assets/Common/WhatsApp Image 2026-10-27 at 1.30.06 PM.jpeg'
+
 export const chairpersonCandidates = [
     {
-        imgSrc:
-            'https://lh3.googleusercontent.com/aida-public/AB6AXuBIMXpmgz-73IpGTZn5rlFsPz2WpV52U2QgsXsnbvZw6mhaH-hdhwh0kxc9o-Ri6FfCBJ7pMUlQklpAuOzPAinWUeioYvpyUh9H0iZjzmzdufNNkEZIIxBBaRW_I7AuXfeQrXrLuaqHWF6Z3WV60WarltqAMu4fRPvN3oc5-RIgftQ3zqpz_qgjHAq0aFTNdHhN2kcxpqjRYy7R4o1CZkT2uzXsIKGLy8Ls0Ib-DRp81qnsN5SdJZab',
+        imgSrc: ksuPhoto,
         imgAlt: 'Abdulla Anoob Khan',
         name: 'Abdulla Anoob',
         nameLine2: 'Khan',
@@ -25,8 +28,7 @@ export const chairpersonCandidates = [
         ],
     },
     {
-        imgSrc:
-            'https://lh3.googleusercontent.com/aida-public/AB6AXuA6qtrAXmv9QMPO-hrJ77S07Y6Fl4tAxnUyLO1nPYvPNu4SSZp3nBUSF_VX3sjGC4gd7ermB3UfvmscngHI6ajrh9jFfac28LNIhVFDzKoWQrdHYYwKW__ZB05lRP3pCUBohy8WJtnKHoac_9cs62XRgm2gvAHcuFayxBbUeWerw1dIx61NxU3vXQbEQjhJ_FYkvVj4MqfZffjlFRfwVk662iFZrrrvnGJApLtfg5AZI8ynh5vQU6eV',
+        imgSrc: sfiPhoto,
         imgAlt: 'Swaroop Chandran',
         name: 'Swaroop Chandran',
         nameLine2: null,
@@ -52,8 +54,7 @@ export const chairpersonCandidates = [
         ],
     },
     {
-        imgSrc:
-            'https://lh3.googleusercontent.com/aida-public/AB6AXuCFZO9qpeLPBSC5DshVWT3Of5Dp56mOfLl50-r4SRNqShmHRTHw65d4xU6NU28Zc_mOGmRvtyuZHSNnvnDRrklm3S0oIv4pXB2rO-18BaW9trQHa0qcOjOStoWAGCG1owbVWrbQVMTbJN5Bwgbg-2meu3TkpjxGTncfuDkAl9Oz6h3w-oJrtwqHCiTwnyCScN8JIFMRr1RvMWs0tOWkWxe0kpLuVqn410wkh0I-ht_00qiYyDd3KnVL',
+        imgSrc: abvpPhoto,
         imgAlt: 'ABVP Candidate',
         name: 'Swaroop Chandran',
         nameLine2: null,
@@ -80,8 +81,7 @@ export const chairpersonCandidates = [
 
 export const viceChairpersonCandidates = [
     {
-        imgSrc:
-            'https://lh3.googleusercontent.com/aida-public/AB6AXuDmSwk2CPb4AQWokZKA5rUooixRiSuBnomuztEjOLIu3fQxZI-99TSoj2SYkdUUFR_s41obvCmI4lhYDHRcrRmiT7rGX-WxZ25VIDzCflM9d7fAA6rvMyiotNUCCw5rUxB1aWC42ditij8RTgCjTaNuG2sRl9_8o_RuParAXFQBh5AiC3llvZc_9dOomuILTvR5FLJLfOSqj7DASPFMVSPOzJ2ZgQJbXIe9j_K_gItwn-IsY1hU7jl5',
+        imgSrc: ksuPhoto,
         imgAlt: 'Abdulla Anoob Khan',
         name: 'Abdulla Anoob',
         nameLine2: 'Khan',
@@ -105,8 +105,7 @@ export const viceChairpersonCandidates = [
         ],
     },
     {
-        imgSrc:
-            'https://lh3.googleusercontent.com/aida-public/AB6AXuDYStJulTkcAN17D82OQB56LBD8fkufsa4OCAuw6JdhBq2aIYJUGpxSX0wMqQObs2nX5Rnx0ir09W4ysH8C7CSBNEzTxDgS4f1Qn9zNJJKdteWMAofztcoRhtvT5e2_Kl9UOU-uxZoMSg_x3sKY5YAMG_43MeOEzi--B5xus1D57Y3n_1b4_kIZHfmLeOi9L6iqbPUAIz6Cd9nzyrPy-8APARh1z76nT8T7UFeZxaPzL8LMm7i5E2Rv',
+        imgSrc: sfiPhoto,
         imgAlt: 'Swaroop Chandran',
         name: 'Swaroop Chandran',
         nameLine2: null,
@@ -130,8 +129,7 @@ export const viceChairpersonCandidates = [
         ],
     },
     {
-        imgSrc:
-            'https://lh3.googleusercontent.com/aida-public/AB6AXuD4GWEt3EjyrCEMGzS75Lu3H5ueO7WA1EhC4yot-YmRGmgX3NfGH0Y2MWVc450ZxdsdUP-ejyTwSqKRY7s7uEGnGVaukp2JJdiVfOi9lVh3TzS-N5nX07tSgVuyAq4_pcWzyC51k60Kv4NJ-tIEdJ7DqZNjcwnn4ASFvjKmdS4uRchNyUrEWOc-CjC_gQs988gnk4DQzT_jgWgBui9S-oYIXibIwAQ-97OtljA-r_5Vbcowvh_NTqik',
+        imgSrc: abvpPhoto,
         imgAlt: 'ABVP Candidate',
         name: 'Swaroop Chandran',
         nameLine2: null,
