@@ -8,11 +8,13 @@ export const PROGRAM_OPTIONS = ["Undergraduate", "Postgraduate"]
 export const DEPARTMENT_OPTIONS = [
     "All",
     "Computer Science Engineering",
-    "Electronics and communication Engineering",
+    "Electronics and Communication Engineering",
     "Mechanical Engineering",
     "Civil Engineering",
     "Electrical and Electronics Engineering",
     "Electrical and Computer Engineering",
+    "Chemical Engineering",
+    "Architecture"
 ]
 
 export const BULLET_POINTS = [
