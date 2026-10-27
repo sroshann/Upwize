@@ -1,18 +1,18 @@
 import { useMemo } from 'react'
 import backgroundImage from '../../../assets/Common/Shape Image.png'
 import { votingPositions } from './votingData'
+import { useNavigate } from 'react-router-dom'  
 
 function DuringElection() {
   const safePositions = useMemo(() => votingPositions, [])
-
+  const navigate = useNavigate();
+  
   const handleVote = (position) => {
-    console.log('Selected position:', position)
+    navigate(`/election/${position.id}`)
   }
 
   return (
     <section className="min-h-screen flex flex-col antialiased relative bg-gradient-to-b from-[#0865FF] to-white text-[#000000]">
-
-      {/* Background Grid & Shape Image Overlay */}
       <div
         style={{
           backgroundImage: `url(${backgroundImage}), linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)`,
