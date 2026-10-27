@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 73fb72add416d088dacb6f49e62810270406d19f
 import { useParams, useNavigate } from 'react-router-dom'
 import backgroundImage from '../../../assets/Common/Shape Image.png'
 import { votingPositions } from './votingData'

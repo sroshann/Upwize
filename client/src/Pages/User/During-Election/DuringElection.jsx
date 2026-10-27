@@ -8,11 +8,7 @@ function DuringElection() {
   const navigate = useNavigate();
   
   const handleVote = (position) => {
-<<<<<<< HEAD
     navigate(`/user/during-election/${position.id}`)
-=======
-    navigate(`/election/${position.id}`)
->>>>>>> 73fb72add416d088dacb6f49e62810270406d19f
   }
 
   return (
