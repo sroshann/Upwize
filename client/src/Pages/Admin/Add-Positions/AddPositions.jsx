@@ -2,8 +2,19 @@
 import { BULLET_POINTS } from "./AddPositionData"
 import FormCard from "./FormCard"
 import AddedPositions from "./AddedPositions"
+import { useGetRecentPositions } from "../../../hooks/admin/before-election.hook"
+import { useEffect } from "react"
+import { queryClient, queryKeys } from "../../../lib/tanstack"
 
 function AddPositions() {
+
+    const { data: rcntPositions = [] } = useGetRecentPositions()
+    useEffect(() => {
+
+        // Resetting recently added cache into empty
+        return () => queryClient.removeQueries({ queryKey: queryKeys.rcntPositions() })
+
+    }, [queryClient])
 
     return (
         <section className="min-h-screen w-full relative overflow-hidden" style={{ background: "linear-gradient(to bottom, #0865FF 0%, #ffffff 100%)" }}>
@@ -49,7 +60,7 @@ function AddPositions() {
                         </div>
                     </div>
 
-                    {/* {positions.length > 0 && <AddedPositions />} */}
+                    {rcntPositions && rcntPositions.length > 0 && <AddedPositions positions={rcntPositions} />}
                 </div>
 
             </main>

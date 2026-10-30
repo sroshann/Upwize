@@ -32,8 +32,8 @@ function App() {
             <Routes>
 
                 {/* Admin */}
-                {/* <Route path="/admin/before-election" element={<BeforeElection />} /> */}
                 <Route path="/" element={<BeforeElection />} />
+                <Route path="/admin/before-election" element={<BeforeElection />} />
                 <Route path="/admin/add-party" element={<AddParty />} />
                 <Route path="/admin/add-position" element={<AddPositions />} />
                 <Route path="/admin/add-guidelines" element={<AddGuidelines />} />

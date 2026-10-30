@@ -4,16 +4,16 @@ import FormCard from './FormCard'
 import AddedParties from './AddedParties'
 import { queryClient, queryKeys } from '../../../lib/tanstack'
 import { useEffect } from 'react'
-import { useGetAssociations } from '../../../hooks/admin/before-election.hook'
+import { useGetRecentAssociations } from '../../../hooks/admin/before-election.hook'
 
 function AddParty() {
 
-    const { data: recentlyAdded = [] } = useGetAssociations()
+    const { data: recentlyAdded = [] } = useGetRecentAssociations()
     
     useEffect(() => {
 
         // Resetting recently added cache into empty
-        return () => queryClient.removeQueries({ queryKey: queryKeys.rcntAssociation() })
+        return () => queryClient.removeQueries({ queryKey: queryKeys.rcntAssociations() })
 
     }, [ queryClient ])
 

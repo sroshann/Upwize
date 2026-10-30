@@ -2,7 +2,7 @@ import { useFormik } from "formik"
 import toast from 'react-hot-toast'
 import { toastStyle } from "../../lib/toast.lib"
 import { validateAddAssociation } from "../../utils/validate.utils"
-import { useAddAssociation } from "../../hooks/admin/before-election.hook"
+import { useAddAssociation, useAddPosition } from "../../hooks/admin/before-election.hook"
 
 // Create association formik
 export const addPartyFormik = ({ setLogoPreview, fileInputRef }) => {
@@ -48,6 +48,7 @@ export const addPartyFormik = ({ setLogoPreview, fileInputRef }) => {
 // Add position formik
 export const addPositionFormik = () => {
 
+    const { mutate } = useAddPosition()
     return useFormik({
 
         initialValues: {
@@ -62,8 +63,8 @@ export const addPositionFormik = () => {
         validateOnChange: false,
         onSubmit: ( values, { resetForm } ) => {
 
-            console.log( values )
-            resetForm()
+            toast.loading('Adding association', { id: 'add-position', style: toastStyle })
+            mutate( values, { onSuccess: () => resetForm() } )
 
         }
 

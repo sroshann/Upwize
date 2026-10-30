@@ -1,10 +1,10 @@
 import React from 'react'
 
-function AddedPositions({ data, setFunction }) {
+function AddedPositions({ positions }) {
 
     const handleRemoveParty = (id) => {
-        setFunction(prev => prev.filter(p => p.id !== id))
-        if (data?.length === 0) setFunction([])
+        // setFunction(prev => prev.filter(p => p.id !== id))
+        // if (data?.length === 0) setFunction([])
     }
 
     return (
@@ -13,7 +13,7 @@ function AddedPositions({ data, setFunction }) {
 
                 {/* Cards grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {data.map(item => (
+                    {positions.map(item => (
                         <div
                             key={item.id}
                             className="bg-white w-[95%] md:w-full mx-auto rounded-xl md:rounded-2xl p-5 flex flex-col gap-y-2 shadow-lg transition-transform duration-300 md:hover:scale-102"

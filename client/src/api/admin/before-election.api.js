@@ -43,3 +43,11 @@ export const addCandidate = async (data) => {
     return response?.data
 
 }
+
+// Adding position
+export const addPosition = async ( data ) => {
+
+    const response = await axiosInstance.post('/admin/before-election/add-position', data)
+    return response?.data
+
+}

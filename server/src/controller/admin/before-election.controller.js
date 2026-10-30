@@ -88,7 +88,7 @@ export const removeAssociation = async (request, response) => {
 }
 
 // Add positions
-export const addPositions = async (request, response) => {
+export const addPosition = async (request, response) => {
 
     try {
 
@@ -100,7 +100,7 @@ export const addPositions = async (request, response) => {
         } = request?.body
 
         // Checking whether the incoming data is already present in data or not
-        const matched = isAlreadyInDB(Position, { position, shortName })
+        const matched = await isAlreadyInDB(Position, { position, shortName })
         if (matched) return response?.status(409).json({ message: `${matched} is already taken` })
 
         const newData = new Position({ 
@@ -119,7 +119,9 @@ export const addPositions = async (request, response) => {
 
         }
 
-    } catch (error) { return response?.status(500).json({ error: 'Error on adding position' }) }
+    } catch (error) { 
+        console.log( error )
+        return response?.status(500).json({ message: 'Error on adding position' }) }
 
 }
 
@@ -139,6 +141,6 @@ export const getPositions = async ( request, response ) => {
     
         }
 
-    } catch ( error ) { return response.status( 500 ).json({ error: 'Error on getting positions' }) }
+    } catch ( error ) { return response.status( 500 ).json({ message: 'Error on getting positions' }) }
 
 }
