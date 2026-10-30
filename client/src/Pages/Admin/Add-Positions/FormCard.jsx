@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Dropdown from '../../../components/Dropdown/Dropdown'
-import { CATEGORY_OPTIONS, GENDER_OPTIONS, PROGRAM_OPTIONS, DEPARTMENT_OPTIONS } from "./AddPositionData"
+import { CATEGORY_OPTIONS, GENDER_OPTIONS, BELONGS_TO } from "./AddPositionData"
 import { addPositionFormik } from '../../../formik/admin/before-election.formik'
+import { DEPARTMENT_OPTIONS, PROGRAM_OPTIONS } from '../../../constants/collegeData.constant'
 
 function FormCard() {
 
@@ -19,9 +20,9 @@ function FormCard() {
 
     useEffect(() => {
 
-        setShowCategory(belongsTo === 'Yes')
-        setShowGender(category === 'Gender')
-        setShowProgram(category === 'Program')
+        setShowCategory(belongsTo)
+        setShowGender(category === 'g')
+        setShowProgram(category === 'p')
 
         return () => {
             setShowCategory(false)
@@ -88,7 +89,7 @@ function FormCard() {
                     <Dropdown
                         value={belongsTo}
                         onChange={(value) => formik.setFieldValue('belongsTo', value)}
-                        options={["No", "Yes"]}
+                        options={ BELONGS_TO }
                         placeholder="No"
                     />
                 </div>
@@ -121,7 +122,7 @@ function FormCard() {
                         value={program}
                         onChange={(value) => formik.setFieldValue('program', value)}
                         options={PROGRAM_OPTIONS}
-                        placeholder="Select"
+                        placeholder="Select program"
                     />
                 </div>
                 <div>

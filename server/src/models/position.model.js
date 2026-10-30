@@ -15,9 +15,9 @@ const positionSchema = new mongoose.Schema(
         shortName: { type: String, unique: [ true, 'Short name should be unique' ] },
         belongsTo: { 
             
-            type: String, 
+            type: Boolean,
             require: [ true, 'Provide belongs to' ], 
-            enum: ['n', 'y'], default: 'n' 
+            enum: [true, false], default: false
         
         },
         category: { type: String, enum: ['p', 'g'] },

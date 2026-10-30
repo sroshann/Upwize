@@ -54,8 +54,8 @@ export const addPositionFormik = () => {
         initialValues: {
 
             position: '', responsibilities: [], shortName: '', 
-            belongsTo: 'No', category: null, program: null, gender: null,
-            program: null, department: null
+            belongsTo: false, category: null, program: null, gender: null,
+            program: null, department: null, description: ''
 
         },
         validateOnBlur: false,

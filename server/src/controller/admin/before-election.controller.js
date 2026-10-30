@@ -119,9 +119,7 @@ export const addPosition = async (request, response) => {
 
         }
 
-    } catch (error) { 
-        console.log( error )
-        return response?.status(500).json({ message: 'Error on adding position' }) }
+    } catch (error) { return response?.status(500).json({ message: 'Error on adding position' }) }
 
 }
 
@@ -144,3 +142,4 @@ export const getPositions = async ( request, response ) => {
     } catch ( error ) { return response.status( 500 ).json({ message: 'Error on getting positions' }) }
 
 }
+

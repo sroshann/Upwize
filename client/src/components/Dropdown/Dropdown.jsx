@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
+// value -> It might contain the initial default value which should be displayed,
+//          and the selecting option is stored on this variable
+// onChange -> This is actually a setter function which used to change the data
+//             in 'value'.
+// options -> This is an array used to list the selection option
+// placeholder -> This holds the placeholder text which should be displayed
 function Dropdown({ value, onChange, options, placeholder }) {
+
     const [open, setOpen] = useState(false)
 
-    const placeholderText = placeholder || options[0]
+    // The coming option format = { display: 'displaying text', value: 'selection value code' }.
+    // The coming 'value' prop ( which is formik ) is also is logical code values.
+    // So incase of providing INITIAL DEFAULT values ( it comes as logical code ),
+    // we should select the 'display' field of that object from options array.
 
-    // Show all options; the placeholder is just for display/empty-state
-    // const listOptions = options.filter((o) => o !== placeholderText)
-
-    const displayValue = value && value !== "" ? value : placeholderText
+    // If there is no need for an INITIAL DEFAULT value ( fromik value has initial value as '' ),
+    // then we can simply show the placeholder text.
+    let displayValue = options.find( option => option?.value === value )?.display
+    if( !displayValue || displayValue === '' ) displayValue = placeholder
 
     const handleSelect = (opt) => {
         onChange(opt)
@@ -84,12 +94,12 @@ function Dropdown({ value, onChange, options, placeholder }) {
                             className="custom-dd-scroll"
                         >
                             {options.map((opt) => {
-                                const isSelected = value === opt
+                                const isSelected = value === opt?.display
                                 return (
-                                    <li key={opt}>
+                                    <li key={opt?.value}>
                                         <button
                                             type="button"
-                                            onClick={() => handleSelect(opt)}
+                                            onClick={() => handleSelect(opt?.value)}
                                             style={{
                                                 width: "100%",
                                                 display: "flex",
@@ -112,7 +122,7 @@ function Dropdown({ value, onChange, options, placeholder }) {
                                                 if (!isSelected) e.currentTarget.style.background = "transparent"
                                             }}
                                         >
-                                            <span>{opt}</span>
+                                            <span>{opt?.display}</span>
                                             {isSelected && (
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"

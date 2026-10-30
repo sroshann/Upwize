@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom"
 import { useEffect } from "react"
 import { Toaster } from "react-hot-toast"
-import { useGetAssociations } from "./hooks/admin/before-election.hook"
+import { useGetAssociations, useGetPositions } from "./hooks/admin/before-election.hook"
 
 import Navbar from "./components/Navbar/Navbar"
 import BeforeElection from "./Pages/Admin/Before-Election/BeforeElection"
@@ -15,6 +15,7 @@ import Footer from "./components/Footer/Footer"
 import AddGuidelines from "./Pages/Admin/Add-Guidelines/AddGuidelines"
 import Login from "./Pages/Login/login"
 import AddCandidate from "./Pages/Admin/Add-Candidate/AddCandidate"
+import { queryKeys } from "./lib/tanstack"
 
 function App() {
 
@@ -22,7 +23,22 @@ function App() {
     // Note: It is the default behaviour of react router dom
     const { pathname } = useLocation()
     useEffect(() => { window.scrollTo(0, 0) }, [pathname])
-    useGetAssociations() // Prefetch associations on app load — errors handled globally
+
+    // Prefetching some data on app load — errors handled globally
+    useGetAssociations()
+    useGetPositions()
+
+    // Clearing cache on closing the application
+    useEffect( () => {
+
+        return () => {
+
+            queryClient.removeQueries({ queryKey: queryKeys.associations() })
+            queryClient.removeQueries({ queryKey: queryKeys.positions() })
+
+        }
+
+    }, [] )
 
     return (
 

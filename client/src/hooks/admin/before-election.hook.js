@@ -17,8 +17,7 @@ export const useAddAssociation = () => {
         mutationFn: addAssociation,
         onSuccess: ({ message, data }) => {
 
-            // In here there will be no caches on start, this is created manually
-            queryClient.setQueryData(queryKeys.associations(), (old = []) => [...old, data])
+            queryClient.invalidateQueries({ queryKey: queryKeys.associations() })
             queryClient.setQueryData(queryKeys.rcntAssociations(), (old = []) => [...old, data])
             toast.success(message, { style: toastStyle })
         },
@@ -118,7 +117,7 @@ export const useAddPosition = () => {
         mutationFn: addPosition,
         onSuccess: ({ message, data }) => {
 
-            queryClient.invalidateQueries({ queryKey: queryKeys.positions })
+            queryClient.invalidateQueries({ queryKey: queryKeys.positions() })
             queryClient.setQueryData(queryKeys.rcntPositions(), (old = []) => [...old, data])
             toast.success(message, { style: toastStyle })
 

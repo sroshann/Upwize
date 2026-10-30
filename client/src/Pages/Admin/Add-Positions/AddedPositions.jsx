@@ -1,5 +1,3 @@
-import React from 'react'
-
 function AddedPositions({ positions }) {
 
     const handleRemoveParty = (id) => {
@@ -15,7 +13,7 @@ function AddedPositions({ positions }) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {positions.map(item => (
                         <div
-                            key={item.id}
+                            key={item._id}
                             className="bg-white w-[95%] md:w-full mx-auto rounded-xl md:rounded-2xl p-5 flex flex-col gap-y-2 shadow-lg transition-transform duration-300 md:hover:scale-102"
                         >
                             {/* Top row */}
@@ -24,7 +22,7 @@ function AddedPositions({ positions }) {
                                 <section className="flex items-center gap-2 w-full">
 
                                     <p className="text-[#1a1a2e] text-sm font-bold leading-tight truncate">
-                                        {item.positionName}
+                                        {item.position}
                                     </p>
                                     {/* Short name */}
                                     {item?.shortName && <p className="text-[#616161] text-xs font-medium mt-0.5 truncate">
