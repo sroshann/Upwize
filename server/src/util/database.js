@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { getRedisAllData, setRedisHashAll } from '../lib/redis.lib.js';
 
 export const connectDB = async () => {
 
@@ -28,5 +29,27 @@ export const isAlreadyInDB = async ( Model, data ) => {
         .filter(field => String(existing[field]) === String(data[field]))
 
     return data[matchedFields[0]]
+
+}
+
+// Fetching all data from a collection and from redis
+// Model -> The corresponding database model
+// redisCollection -> The corresponding redis collection
+export const fetchAllData = async ( Model, redisCollection ) => {
+
+    try {
+
+        const redisData = await getRedisAllData( redisCollection )
+        if( redisData ) return { data: redisData, error: false }
+        else {
+
+            const data = await Model.find().lean()
+            const formatted = data?.map(({ __v, ...rest }) => rest)
+            await setRedisHashAll( redisCollection, formatted, 1800 )
+            return { data: formatted, error: false }
+
+        }
+
+    } catch ( error ) { return { message: 'Error on getting data', error: false } }
 
 }

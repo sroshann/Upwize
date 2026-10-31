@@ -1,9 +1,9 @@
 import { Association } from "../../models/association.model.js"
 import { validateImage } from "../../util/validateFile.util.js"
 import { uploadToCloudinary } from '../../lib/cloudinary.lib.js'
-import { getRedisAllData, redisClient, redisCollections, setRedisHash, setRedisHashAll } from "../../lib/redis.lib.js"
+import { redisClient, redisCollections, setRedisHash } from "../../lib/redis.lib.js"
 import Position from "../../models/position.model.js"
-import { isAlreadyInDB } from "../../util/database.js"
+import { fetchAllData, isAlreadyInDB } from "../../util/database.js"
 
 // Add association
 export const addAssociation = async (request, response) => {
@@ -54,21 +54,10 @@ export const addAssociation = async (request, response) => {
 // Get all associations
 export const getAssociations = async (request, response) => { 
 
-    try {
-
-        // Getting the data from redis, if data not in redis it is fetched from database
-        const associationRedis = await getRedisAllData(redisCollections.associations)
-        if( associationRedis ) return response.status( 200 ).json({ data: associationRedis })
-        else {
-
-            const data = await Association.find().lean()
-            const formatted = data?.map(({ __v, ...rest }) => rest )
-            await setRedisHashAll( redisCollections.associations, formatted, 1800 )
-            return response?.status( 200 ).json({ data: formatted })
-
-        }
-
-    } catch ( error ) { return response.status( 500 ).json({ message: 'Error on getting associations' }) }
+    // Getting all association data through database lib function
+    const { data, error, message } = await fetchAllData( Association, redisCollections.associations )
+    if( error ) return response.status( 500 ).json({ message })
+    else return response.status( 200 ).json({ data })
 
 }
 
@@ -126,20 +115,10 @@ export const addPosition = async (request, response) => {
 // Get all positions
 export const getPositions = async ( request, response ) => {
 
-    try {
-
-        const redisPosition = await getRedisAllData( redisCollections.positions )
-        if( redisPosition ) return response.status( 200 ).json({ data: redisPosition })
-        else {
-    
-            const data = await Position.find().lean()
-            const formatted = data.map(({ __v, ...rest }) => rest)
-            await setRedisHashAll( redisCollections.positions, formatted, 1800 )
-            return response.status( 200 ).json({ data: formatted })
-    
-        }
-
-    } catch ( error ) { return response.status( 500 ).json({ message: 'Error on getting positions' }) }
+    // Getting all position data through database lib function
+    const { data, error, message } = await fetchAllData( Position, redisCollections.positions )
+    if( error ) return response.status( 500 ).json({ message })
+    else return response.status( 200 ).json({ data })
 
 }
 
