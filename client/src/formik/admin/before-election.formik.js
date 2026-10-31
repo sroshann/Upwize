@@ -1,7 +1,7 @@
 import { useFormik } from "formik"
 import toast from 'react-hot-toast'
 import { toastStyle } from "../../lib/toast.lib"
-import { validateAddAssociation } from "../../utils/validate.utils"
+import { validateAddAssociation, validatePosition } from "../../utils/validate.utils"
 import { useAddAssociation, useAddPosition } from "../../hooks/admin/before-election.hook"
 
 // Create association formik
@@ -54,10 +54,11 @@ export const addPositionFormik = () => {
         initialValues: {
 
             position: '', responsibilities: [], shortName: '', 
-            belongsTo: false, category: null, program: null, gender: null,
+            belongsTo: false, category: null, gender: null,
             program: null, department: null, description: ''
 
         },
+        validate: validatePosition,
         validateOnBlur: false,
         validateOnMount: false,
         validateOnChange: false,
