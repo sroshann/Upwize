@@ -1,3 +1,7 @@
+import { labelOf } from '../../../utils/display.utils'
+import { GENDER_OPTIONS, CATEGORY_OPTIONS } from './AddPositionData'
+import { PROGRAM_OPTIONS, DEPARTMENT_OPTIONS } from '../../../constants/collegeData.constant'
+
 function AddedPositions({ positions }) {
 
     const handleRemoveParty = (id) => {
@@ -44,25 +48,40 @@ function AddedPositions({ positions }) {
 
                             </div>
 
-                            {item?.category && <section>
+                            {item?.category && <>
 
-                                <section className="flex justify-center gap-1 items-center w-fit">
+                                <section>
 
-                                    {item?.gender && <p className="text-red-600 text-xs font-medium mt-0.5 truncate">
-                                        {item.gender}
-                                    </p>}
+                                    <section className="flex justify-center gap-1 items-center w-fit">
 
-                                    {item?.program && <p className="text-red-600 text-xs font-medium mt-0.5 truncate">
-                                        {item.program}
-                                    </p>}
+                                        {/* Category — decoded from 'p'/'g' to 'Program'/'Gender' */}
+                                        <p className="text-red-600 text-xs font-medium mt-0.5 truncate">
+                                            {labelOf(CATEGORY_OPTIONS, item.category)}
+                                        </p>
 
-                                    {item?.department && <p className="text-red-600 text-xs font-medium mt-0.5 truncate">
-                                        {item.department}
-                                    </p>}
+                                        {/* Gender — decoded from 'm'/'f' to 'Male'/'Female' */}
+                                        {item?.gender && <p className="text-red-600 text-xs font-medium mt-0.5 truncate">
+                                            {labelOf(GENDER_OPTIONS, item.gender)}
+                                        </p>}
+
+                                        {/* Program — decoded from 'ug'/'pg' to 'Undergraduate'/'Postgraduate' */}
+                                        {item?.program && <p className="text-red-600 text-xs font-medium mt-0.5 truncate">
+                                            {labelOf(PROGRAM_OPTIONS, item.program)}
+                                        </p>}
+
+                                    </section>
+                                    <section>
+                                        
+                                        {/* Department — decoded from 'CSE' to 'Computer Science Engineering' etc. */}
+                                        {item?.department && <p className="text-red-600 text-xs font-medium mt-0.5 truncate">
+                                            {labelOf(DEPARTMENT_OPTIONS, item.department)}
+                                        </p>}
+                                        
+                                    </section>
 
                                 </section>
 
-                            </section>}
+                            </>}
 
                             {/* Description */}
                             <p className="text-[#616161] text-[13px] leading-[1.5] line-clamp-3 flex-1">
