@@ -12,7 +12,7 @@ const positionSchema = new mongoose.Schema(
         
         },
         responsibilities: { type: [ String ], default: [] },
-        shortName: { type: String, unique: [ true, 'Short name should be unique' ] },
+        shortName: { type: String, unique: [ true, 'Short name should be unique' ], sparse: true },
         belongsTo: { 
             
             type: Boolean,

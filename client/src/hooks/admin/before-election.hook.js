@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import {
 
-    addAssociation, addPosition, getAssociations,
-    getPositions, removeAssociation
+    addAssociation, addPosition, getAssociations, getPositions, 
+    removeAssociation, removePosition
 
 } from '../../api/admin/before-election.api'
 import { toastStyle } from '../../lib/toast.lib'
@@ -42,9 +42,7 @@ export const useRemoveAssociation = () => {
             queryClient.setQueryData(queryKeys.rcntAssociations(), (old = []) =>
                 old.filter(association => association._id !== id)
             )
-            queryClient.setQueryData(queryKeys.associations(), (old = []) =>
-                old.filter(association => association._id !== id)
-            )
+            queryClient.invalidateQueries({ queryKey: queryKeys.associations() })
             toast.success(message, { style: toastStyle })
 
         },
@@ -124,6 +122,30 @@ export const useAddPosition = () => {
         },
         onError: error => toast.error(error?.response?.data?.message || 'Something went wrong', { style: toastStyle }),
         onSettled: () => toast.remove('add-position')
+
+    })
+
+    return { mutate }
+
+}
+
+// Remove position
+export const useRemovePosition = () => {
+
+    const { mutate } = useMutation({
+
+        mutationFn: removePosition,
+        onSuccess: ( message, id ) => {
+
+            queryClient.invalidateQueries({ queryKey: queryKeys.positions() })
+            queryClient.setQueryData( queryKeys.rcntPositions(), ( old = [] ) => 
+                old.filter( position => position._id !== id )
+            )
+            toast.success( message, { style: toastStyle } )
+
+        },
+        onError: ( error ) => toast.error( error?.response?.data?.message || 'Something went wrong', { style: toastStyle } ),
+        onSettled: () => toast.remove('remove-position')
 
     })
 

@@ -1,12 +1,18 @@
 import { labelOf } from '../../../utils/display.utils'
 import { GENDER_OPTIONS, CATEGORY_OPTIONS } from './AddPositionData'
 import { PROGRAM_OPTIONS, DEPARTMENT_OPTIONS } from '../../../constants/collegeData.constant'
+import toast from 'react-hot-toast'
+import { toastStyle } from '../../../lib/toast.lib'
+import { useRemovePosition } from '../../../hooks/admin/before-election.hook'
 
 function AddedPositions({ positions }) {
 
+    const { mutate } = useRemovePosition()
     const handleRemoveParty = (id) => {
-        // setFunction(prev => prev.filter(p => p.id !== id))
-        // if (data?.length === 0) setFunction([])
+
+        toast.loading('Removing position', { id:'remove-position', style: toastStyle })
+        mutate( id )
+
     }
 
     return (
@@ -91,11 +97,9 @@ function AddedPositions({ positions }) {
                             {/* Remove button */}
                             <button
                                 type="button"
-                                onClick={() => handleRemoveParty(item.id)}
+                                onClick={() => handleRemoveParty(item._id)}
                                 className="w-full mt-auto bg-[#1a1a2e] hover:bg-red-600 text-white text-sm font-semibold py-2.5 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-red-500/20 hover:-translate-y-0.5 cursor-pointer"
-                            >
-                                Remove
-                            </button>
+                            >Remove</button>
                         </div>
                     ))}
                 </div>

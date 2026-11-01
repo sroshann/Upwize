@@ -51,3 +51,12 @@ export const addPosition = async ( data ) => {
     return response?.data
 
 }
+
+// Removing position
+export const removePosition = async ( id ) => {
+
+    const response = await axiosInstance.delete('/admin/before-election/remove-position', { data: { id } })
+    const { message } = response?.data
+    return message
+
+}

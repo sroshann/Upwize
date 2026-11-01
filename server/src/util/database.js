@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { getRedisAllData, setRedisHashAll } from '../lib/redis.lib.js';
+import { getRedisAllData, redisClient, setRedisHashAll } from '../lib/redis.lib.js';
 
 export const connectDB = async () => {
 
@@ -12,9 +12,11 @@ export const connectDB = async () => {
 
 }
 
-// This function is used to find any data is already present in database or not
-// Model -> The corresponding database model
-// data -> The data to checked, as object
+/** This function is used to find any data is already present in database or not
+ * @param { Database model } Model - The model in which data duplication checked
+ * @param { { key: value } } data - The data which should be checked for duplication
+ * @returns { string | null } - Duplicate value or null
+ * */
 export const isAlreadyInDB = async ( Model, data ) => {
 
     const conditions = Object.entries(data)
@@ -32,9 +34,11 @@ export const isAlreadyInDB = async ( Model, data ) => {
 
 }
 
-// Fetching all data from a collection and from redis
-// Model -> The corresponding database model
-// redisCollection -> The corresponding redis collection
+/** Fetching all data from a collection and from redis
+ * @param { Database model } Model - The model in which data should be retreived
+ * @param { string } redisCollection - The redis collection in which change should be altered
+ * @returns { { message: string, error: boolean } }
+ * */
 export const fetchAllData = async ( Model, redisCollection ) => {
 
     try {
@@ -51,5 +55,25 @@ export const fetchAllData = async ( Model, redisCollection ) => {
         }
 
     } catch ( error ) { return { message: 'Error on getting data', error: false } }
+
+}
+
+/** Deleting a document from a collection
+ * @param { string } id - The mongo object id of item which should be deleted
+ * @param { Database model } Model - The model in which deletion should be performed
+ * @param { string } redisCollection - The redis collection in which change should be altered
+ * @param { string } content - The string that should be included in returning messages
+ * @returns { { message: string, error: boolean } }
+ * */
+export const deleteDocument = async ( id, Model, redisCollection, content = '' ) => {
+
+    try {
+
+        const deleteStatus = await Model.findByIdAndDelete(id)
+        await redisClient.hDel( redisCollection, id )
+        if( !deleteStatus ) return { message: `${ content } not found`, error : true }
+        else return { message: `${ content } deleted successfully`, error: false }
+
+    } catch ( error ) { return { message: `Error on removing ${ content }`, error: true } }
 
 }

@@ -32,10 +32,11 @@ export const redisCollections = {
 
 }
 
-// Store a single data into redis as hash set
-// collection - redis collection name
-// data - data array to be stored
-// expireTime - redis expiry time 
+/** Store a single data into redis as hash set
+ * @param { string } collection - The redis collection
+ * @param { object } data - The data which should be stored
+ * @param { string } expireTime - The amount of time in which the data should be persist on redis
+ * */
 export const setRedisHash = async ( collection, data, expireTime ) => {
 
     await redisClient.hSet( collection, data?._id.toString(), JSON.stringify( data ) )
@@ -43,10 +44,11 @@ export const setRedisHash = async ( collection, data, expireTime ) => {
 
 }
 
-// It stores data into redis, one by one as redis hashes
-// collection - redis collection name
-// data - data array to be stored
-// expireTime - redis expiry time
+/** It stores data into redis, one by one as redis hashes
+ * @param { string } collection - The redis collection
+ * @param { object } data - The data which should be stored
+ * @param { string } expireTime - The amount of time in which the data should be persist on redis
+ * */
 export const setRedisHashAll = async ( collection, data, expireTime ) => {
 
     // multi() creates a Redis transaction: a way to queue up several commands 
@@ -60,8 +62,9 @@ export const setRedisHashAll = async ( collection, data, expireTime ) => {
 
 }
 
-// It gives all the data stored in redis collection
-// collection - redis collection name
+/** It gives all the data stored in redis collection
+ * @param { string } collection - The redis collection
+ * */
 export const getRedisAllData = async ( collection ) => {
 
     const dataObject = await redisClient.hGetAll( collection )

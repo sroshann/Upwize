@@ -1,9 +1,9 @@
-import { Association } from "../../models/association.model.js"
+﻿import { Association } from "../../models/association.model.js"
 import { validateImage } from "../../util/validateFile.util.js"
 import { uploadToCloudinary } from '../../lib/cloudinary.lib.js'
-import { redisClient, redisCollections, setRedisHash } from "../../lib/redis.lib.js"
+import { redisCollections, setRedisHash } from "../../lib/redis.lib.js"
 import Position from "../../models/position.model.js"
-import { fetchAllData, isAlreadyInDB } from "../../util/database.js"
+import { deleteDocument, fetchAllData, isAlreadyInDB } from "../../util/database.js"
 
 // Add association
 export const addAssociation = async (request, response) => {
@@ -64,15 +64,11 @@ export const getAssociations = async (request, response) => {
 // Remove association
 export const removeAssociation = async (request, response) => {
 
-    try {
-
-        const { id } = request?.body
-        const deletedAssociation = await Association.findByIdAndDelete(id)
-        await redisClient.hDel(redisCollections.associations, id)
-        if (!deletedAssociation) return response.status(404).json({ message: 'Association not found' })
-        return response.status(200).json({ message: 'Association removed successfully' })
-
-    } catch (error) { return response.status(500).json({ message: 'Error on removing association' }) }
+    // Association is removed through library function
+    const { id } = request?.body
+    const { message, error } = await deleteDocument( id, Association, redisCollections.associations, 'Association' )
+    if( error ) return response.status( 404 ).json({ message })
+    else return response.status( 200 ).json({ message })
 
 }
 
@@ -122,3 +118,12 @@ export const getPositions = async ( request, response ) => {
 
 }
 
+// Remove position
+export const removePosition = async ( request, response ) => {
+
+    const { id } = request?.body
+    const { message, error } = await deleteDocument( id, Position, redisCollections.positions, 'Position' )
+    if( error ) return response.status( 404 ).json({ message })
+    else return response.status( 200 ).json({ message })
+
+}
